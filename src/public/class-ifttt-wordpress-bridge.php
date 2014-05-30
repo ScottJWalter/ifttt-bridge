@@ -110,18 +110,28 @@ class Ifttt_Wordpress_Bridge {
 	 * @since   1.0.0
 	 */
 	public function bridge( $method ) {
-		if ( $method != 'metaWeblog.newPost' ) {
-			return;
+		$this->log( 'xmlrpc call received' );
+		try {
+			if ( $method != 'metaWeblog.newPost' ) {
+				$this->log( "Method $method not relevant" );
+				return;
+			}
+			$message = $this->create_message();
+			$content_struct = $message->params[3];
+			if ( ! $this->contains_ifttt_wordpress_bridge_tag( $content_struct ) ) {
+				$this->log( "Tag 'ifttt_wordpress_bridge' not found" );
+				return;
+			}
+			$this->log( 'Raw data: ' . $content_struct['description'] );
+			$bridge_data = $this->parse_description( $content_struct['description'] );
+			$this->log( 'Bridge data: ' . print_r( $bridge_data, true ) );
+			do_action( 'ifttt_wordpress_bridge', $bridge_data );
+			header( 'Content-Type: text/xml; charset=UTF-8' );
+			readfile( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'default_response.xml' );
+			die();
+		} catch (Exception $e) {
+			$this->log( 'An error occurred: ' . $e->getMessage() );
 		}
-		$message = $this->create_message();
-		$contentStruct = $message->params[3];
-		if ( ! $this->is_ifttt_bridge_call( $contentStruct ) ) {
-			return;
-		}
-		do_action( 'ifttt_bridge', $this->parse_description( $contentStruct ) );
-		header( 'Content-Type: text/xml; charset=UTF-8' );
-		readfile( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'default_response.xml' );
-		die();
 	}
 
 	/**
@@ -143,17 +153,17 @@ class Ifttt_Wordpress_Bridge {
 	}
 
 	/**
-	 * Decides if the incoming request if relevant. A tag 'IFTTT-Bridge' must be used.
+	 * Decides if the incoming request if relevant. A tag 'ifttt_wordpress_bridge' must be used.
 	 *
 	 * @since   1.0.0
 	 */
-	private function is_ifttt_bridge_call( $contentStruct ) {
-		if ( ! array_key_exists( 'mt_keywords', $contentStruct ) ) {
+	private function contains_ifttt_wordpress_bridge_tag( $content_struct ) {
+		if ( ! array_key_exists( 'mt_keywords', $content_struct ) ) {
 			return false;
 		}
-		$tags = $contentStruct['mt_keywords'];
+		$tags = $content_struct['mt_keywords'];
 		foreach ( $tags as $tag ) {
-			if ( $tag == 'IFTTT-Bridge' ) {
+			if ( $tag == 'ifttt_wordpress_bridge' ) {
 				return true;
 			}
 		}
@@ -165,7 +175,29 @@ class Ifttt_Wordpress_Bridge {
 	 *
 	 * @since   1.0.0
 	 */
-	private function parse_description( $content_struct ) {
-		return json_decode( $content_struct['description'] );
+	private function parse_description( $description ) {
+		// TODO autodetect format
+		// return json_decode( $description );
+		return $description;
 	}
+
+
+	/**
+	 * Logs the given content to the log of this plugin.
+	 *
+	 * @since   1.0.0
+	 */
+	private function log( $content ) {
+		$log_array = get_option( 'ifttt_wordpress_bridge_log' );
+		if ( $log_array ) {
+			if ( count( $log_array ) == 30 ) {
+				array_pop( $log_array );
+			}
+			array_unshift( $log_array, $content );
+			update_option( 'ifttt_wordpress_bridge_log', $log_array );
+		} else {
+			$log_array = array( $content );
+			add_option( 'ifttt_wordpress_bridge_log', $log_array );
+		}
+	}	
 }

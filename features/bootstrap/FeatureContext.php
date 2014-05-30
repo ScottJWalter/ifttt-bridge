@@ -154,7 +154,8 @@ class FeatureContext extends MinkContext {
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name AND option_value = :option_value' );
 		$stmt->execute( array( ':option_name' => $option_name, ':option_value' => $option_value ) );
-		if ( 0 == $this->num_of_rows( $stmt ) ) {
+		$result = $this->fetch_all( $stmt );
+		if ( 0 == count( $result ) ) {
 			$stmt = $pdo->prepare( 'INSERT INTO wp_options (option_name, option_value) VALUES (:option_name, :option_value)' );
 		} else {
 			$stmt = $pdo->prepare( 'UPDATE wp_options SET option_value = :option_value WHERE option_name = :option_name' );
@@ -183,9 +184,11 @@ class FeatureContext extends MinkContext {
 	 */
 	public function assert_option_value( $option_name, $option_value ) {
 		$pdo  = $this->create_pdo();
-		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name AND option_value = :option_value' );
-		$stmt->execute( array( ':option_name' => $option_name, ':option_value' => $option_value ) );
-		assertEquals( $this->num_of_rows( $stmt ), 1 );
+		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
+		$stmt->execute( array( ':option_name' => $option_name ) );
+		$result = $this->fetch_all( $stmt );
+		assertEquals( count( $result ), 1, "Option '$option_name' doesn't exists" );
+		assertEquals( $option_value, $result[0]['option_value'], "Option '$option_name' should have value '$option_value' but has value '".$result[0]['option_value']."'" );
 	}
 
 	/**
@@ -195,7 +198,8 @@ class FeatureContext extends MinkContext {
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => $option_name ) );
-		assertEquals( $this->num_of_rows( $stmt ), 0 );
+		$result = $this->fetch_all( $stmt );
+		assertEquals( count( $result ), 0, "The option '$option_name' was found but should not exist" );
 	}
 
 	/**
@@ -233,6 +237,24 @@ class FeatureContext extends MinkContext {
 	public function assert_response_content_type( $expected ) {
 		assertEquals( $expected, $this->response_info['content_type'] );
 	}
+
+	/**
+	 * @Given /the log contains$/
+	 */
+	public function assert_log( $table ) {
+		$expected_entries = $table->getRows();
+		$pdo  = $this->create_pdo();
+		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
+		$stmt->execute( array( ':option_name' => 'ifttt_wordpress_bridge_log' ) );
+		$result = $this->fetch_all( $stmt );
+		assertEquals( count( $result ), 1, "Option 'ifttt_wordpress_bridge_log' doesn't exists" );
+		$log_entries = unserialize( $result[0]['option_value'] );
+		assertEquals( count( $expected_entries ), count( $log_entries ) );
+		for ( $i = 0; $i < count( $expected_entries ); $i++ ) {
+			assertEquals( $expected_entries[$i][0], $log_entries[$i] );
+		}
+	}
+
 
 	private function wp_hash( $data, $scheme = 'auth' ) {
 		$salt = $this->wp_salt( $scheme );
@@ -352,10 +374,12 @@ class FeatureContext extends MinkContext {
 		return $pdo;
 	}
 
-	private function num_of_rows( $result ) {
-		$count = 0;
-		foreach ( $result as $row ) $count++;
-		return $count;
+	private function fetch_all( $stmt ) {
+		$result = array();
+		while ( $row = $stmt->fetch( PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT ) )  {
+			$result[] = $row;
+		}
+		return $result;
 	}
 
 	private function path() {
