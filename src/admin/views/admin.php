@@ -49,6 +49,28 @@ foreach ( $this->log as $log_entry ) {
 	<form action="admin-post.php" method="post">
 	  <input type="hidden" name="action" value="sent_post_request">
 	  <input type="hidden" name="redirect_url" value="sent_post_request">
+		<table class="form-table">
+			<tbody>
+				<tr>
+					<th scope="row"><label for="test-request-title"><?php _ex( 'Title', 'Test request form label', $this->plugin_slug ); ?></label></th>
+					<td><input type="text" class="regular-text" id="test-request-title" name="test-request-title"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="test-request-description"><?php _ex( 'Description', 'Test request form label', $this->plugin_slug ); ?></label></th>
+					<td><input type="text" class="regular-text" id="test-request-description" name="test-request-description"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="test-request-tags"><?php _ex( 'Tags', 'Test request form label', $this->plugin_slug ); ?></label></th>
+					<td><input type="text" class="regular-text" id="test-request-tags" name="test-request-tags">
+					<p class="description"><?php _ex( "Comma-separated list. The label 'ifttt_wordpress_bridge' will be used automatically.", 'Test request form description', $this->plugin_slug ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="test-request-draft"><?php _ex( 'Draft', 'Test request form label', $this->plugin_slug ); ?></label></th>
+					<td><input name="test-request-draft" type="checkbox" id="test-request-draft" value="1" /></td>
+				</tr>
+			</tbody>
+		</table>
 		<?php submit_button( _x( 'Send request', 'Button label', $this->plugin_slug ), 'primary', 'send-test-request' ); ?>
 	</form>
 </div>

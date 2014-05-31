@@ -124,10 +124,8 @@ class Ifttt_Wordpress_Bridge {
 				$this->log( "Tag 'ifttt_wordpress_bridge' not found" );
 				return;
 			}
-			$this->log( 'Raw data: ' . $content_struct['description'] );
-			$bridge_data = $this->parse_description( $content_struct['description'] );
-			$this->log( 'Bridge data: ' . print_r( $bridge_data, true ) );
-			do_action( 'ifttt_wordpress_bridge', $bridge_data );
+			$this->log( 'Received data: ' . json_encode( $content_struct ) );
+			do_action( 'ifttt_wordpress_bridge', $content_struct );
 			$this->log( "Successfully called 'ifttt_wordpress_bridge' actions" );
 			header( 'Content-Type: text/xml; charset=UTF-8' );
 			readfile( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'default_response.xml' );
@@ -172,18 +170,6 @@ class Ifttt_Wordpress_Bridge {
 		}
 		return false;
 	}
-
-	/**
-	 * Parses the content. JSON format expected.
-	 *
-	 * @since   1.0.0
-	 */
-	private function parse_description( $description ) {
-		// TODO autodetect format
-		// return json_decode( $description );
-		return $description;
-	}
-
 
 	/**
 	 * Logs the given content to the log of this plugin.

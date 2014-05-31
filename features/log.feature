@@ -11,8 +11,7 @@ Feature: Log the processing of the IFTTT xmlrcp call
     When I sent a request via IFTTT
     Then the log contains
       | Successfully called 'ifttt_wordpress_bridge' actions |
-      | Bridge data: %DESCRIPTION% |
-      | Raw data: %DESCRIPTION% |
+      | Received data: {"title":"%TITLE%","description":"%DESCRIPTION%","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
       | xmlrpc call received |
 
   Scenario: Don't log IFTTT request if log is disabled
@@ -33,9 +32,8 @@ Feature: Log the processing of the IFTTT xmlrcp call
     When I sent a request via IFTTT
     Then the log contains
       | An error occurred: Error processing ifttt_wordpress_bridge action |
-      | Bridge data: %DESCRIPTION% |
-      | Raw data: %DESCRIPTION% |
-      | xmlrpc call received |
+      | Received data: {"title":"%TITLE%","description":"%DESCRIPTION%","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
+            | xmlrpc call received |
 
   Scenario: See empty log
     Given a fresh WordPress is installed
@@ -56,8 +54,7 @@ Feature: Log the processing of the IFTTT xmlrcp call
     When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
     Then I should see
       | Successfully called 'ifttt_wordpress_bridge' actions |
-      | Bridge data: %DESCRIPTION% |
-      | Raw data: %DESCRIPTION% |
+      | Received data: {"title":"%TITLE%","description":"%DESCRIPTION%","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
       | xmlrpc call received |
 
   Scenario: Log disabled on admin page

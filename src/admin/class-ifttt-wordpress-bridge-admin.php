@@ -137,7 +137,17 @@ class Ifttt_Wordpress_Bridge_Admin {
 	 */
 	public function send_test_request() {
 		$url = get_site_url() . '/xmlrpc.php';
-		$xml = file_get_contents( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'test_request_template.xml' );
+		$replacements = array(
+			'title' => $_POST['test-request-title'],
+			'description' => $_POST['test-request-description'],
+			'post_status' => array_key_exists( 'test-request-draft', $_POST ) & $_POST['test-request-draft'] == 1 ? 'draft' : 'publish',
+		);
+		$template = file_get_contents( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'test_request_template.xml' );
+		$xml = preg_replace_callback(
+			'/\${([^}]*)}/', function ( $matches ) use ( $replacements ) {
+				return $replacements[$matches[1]];
+			}, $template
+		);
 		$options = array();
 		$options['body'] = $xml;
 		$response = wp_safe_remote_post( $url, $options );
