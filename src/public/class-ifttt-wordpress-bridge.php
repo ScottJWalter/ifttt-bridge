@@ -126,6 +126,7 @@ class Ifttt_Wordpress_Bridge {
 			$bridge_data = $this->parse_description( $content_struct['description'] );
 			$this->log( 'Bridge data: ' . print_r( $bridge_data, true ) );
 			do_action( 'ifttt_wordpress_bridge', $bridge_data );
+			$this->log( "Successfully called 'ifttt_wordpress_bridge' actions" );
 			header( 'Content-Type: text/xml; charset=UTF-8' );
 			readfile( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'default_response.xml' );
 			die();

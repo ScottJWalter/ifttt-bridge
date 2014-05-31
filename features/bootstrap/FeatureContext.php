@@ -67,10 +67,16 @@ class FeatureContext extends MinkContext {
 	}
 
 	/**
-	 * @Given /^the plugin "([^"]*)" is installed \(from source\)$/
+	 * @Given /^the plugin "([^"]*)" is installed \(from ([^\)]*)\)$/
 	 */
-	public function install_plugin_from_src( $plugin_id ) {
-		$this->copy_file_or_dir( $this->path( dirname( dirname( dirname( __FILE__ ) ) ), 'src' ), $this->path( $this->webserver_dir, 'wp-content', 'plugins', $plugin_id ) );
+	public function install_plugin_from_src( $plugin_id, $source ) {
+		$source_path = $this->path( dirname( dirname( dirname( __FILE__ ) ) ), $source );
+		$source_pathinfo = pathinfo( $source_path );
+		$target_file_or_dir_name = $source_pathinfo['basename'];
+		if ( strpos( $target_file_or_dir_name, $plugin_id ) === false ) {
+			$target_file_or_dir_name = $plugin_id;
+		}
+		$this->copy_file_or_dir( $source_path, $this->path( $this->webserver_dir, 'wp-content', 'plugins', $target_file_or_dir_name ) );
 	}
 
 	/**
@@ -130,7 +136,11 @@ class FeatureContext extends MinkContext {
 	 * @Given /^the plugin "([^"]*)" is activated$/
 	 */
 	public function activate_plugin( $plugin_id ) {
-		$plugin_file = "$plugin_id/$plugin_id.php";
+		if ( file_exists( $this->path( $this->webserver_dir, 'wp-content', 'plugins', $plugin_file = "$plugin_id.php" ) ) ) {
+		} elseif ( file_exists( $this->path( $this->webserver_dir, 'wp-content', 'plugins', $plugin_file = "$plugin_id/$plugin_id.php" ) ) ) {
+		} else {
+			throw new Exception( "Plugin file '$plugin_id' not found" );			
+		}
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'active_plugins' ) );
