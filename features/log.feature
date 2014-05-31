@@ -27,3 +27,24 @@ Feature: Log the processing of the IFTTT xmlrcp call
       | Bridge data: %DESCRIPTION% |
       | Raw data: %DESCRIPTION% |
       | xmlrpc call received |
+
+  Scenario: See empty log
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-wordpress-bridge" is installed (from src)
+    And the plugin "ifttt-wordpress-bridge" is activated
+    And I am logged as an administrator
+    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    Then the "ifttt-wordpress-bridge-log" field should contain ""
+
+  Scenario: See log
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-wordpress-bridge" is installed (from src)
+    And the plugin "ifttt-wordpress-bridge" is activated
+    And I sent a request via IFTTT
+    And I am logged as an administrator
+    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    Then I should see
+      | Successfully called 'ifttt_wordpress_bridge' actions |
+      | Bridge data: %DESCRIPTION% |
+      | Raw data: %DESCRIPTION% |
+      | xmlrpc call received |

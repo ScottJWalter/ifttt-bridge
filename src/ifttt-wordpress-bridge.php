@@ -30,7 +30,7 @@ require_once( plugin_dir_path( __FILE__ ) . 'public/class-ifttt-wordpress-bridge
 
 add_action( 'plugins_loaded', array( 'Ifttt_Wordpress_Bridge', 'get_instance' ) );
 
-// if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
-// 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-ifttt-wordpress-bridge-admin.php' );
-// 	add_action( 'plugins_loaded', array( 'Ifttt_Wordpress_Bridge_Admin', 'get_instance' ) );
-// }
+if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
+	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-ifttt-wordpress-bridge-admin.php' );
+	add_action( 'plugins_loaded', array( 'Ifttt_Wordpress_Bridge_Admin', 'get_instance' ) );
+}

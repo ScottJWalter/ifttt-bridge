@@ -213,6 +213,16 @@ class FeatureContext extends MinkContext {
 	}
 
 	/**
+	* @Given /^I should see$/
+	*/
+	public function assert_page_contains_all( $table ) {
+		$rows = $table->getRows();
+		foreach ( $rows as $row ) {
+			$this->assertPageContainsText( $row[0] );
+		}
+	}
+
+	/**
 	 * @Given /I sent a request via IFTTT$/
 	 */
 	public function set_ifttt_request() {

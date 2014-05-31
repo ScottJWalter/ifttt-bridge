@@ -128,7 +128,7 @@ class Ifttt_Wordpress_Bridge {
 			do_action( 'ifttt_wordpress_bridge', $bridge_data );
 			$this->log( "Successfully called 'ifttt_wordpress_bridge' actions" );
 			header( 'Content-Type: text/xml; charset=UTF-8' );
-			readfile( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . 'default_response.xml' );
+			readfile( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'default_response.xml' );
 			die();
 		} catch (Exception $e) {
 			$this->log( 'An error occurred: ' . $e->getMessage() );
