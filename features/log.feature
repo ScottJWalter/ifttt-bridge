@@ -59,3 +59,45 @@ Feature: Log the processing of the IFTTT xmlrcp call
       | Bridge data: %DESCRIPTION% |
       | Raw data: %DESCRIPTION% |
       | xmlrpc call received |
+
+  Scenario: Log disabled on admin page
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-wordpress-bridge" is installed (from src)
+    And the plugin "ifttt-wordpress-bridge" is activated
+    And I am logged as an administrator
+    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    Then the checkbox "ifttt_wordpress_bridge_options_log_enabled" should not be checked
+
+  Scenario: Log enabled on admin page
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-wordpress-bridge" is installed (from src)
+    And the plugin "ifttt-wordpress-bridge" is activated
+    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
+    And I am logged as an administrator
+    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    Then the checkbox "ifttt_wordpress_bridge_options_log_enabled" should be checked
+
+  Scenario: Enable log
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-wordpress-bridge" is installed (from src)
+    And the plugin "ifttt-wordpress-bridge" is activated
+    And I am logged as an administrator
+    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    And I check "ifttt_wordpress_bridge_options_log_enabled"
+    And I press "submit"
+    Then I should see the message "Settings saved"
+    And I should see an "#ifttt-wordpress-bridge-log" element not having an attribute "disabled" with value "disabled"
+
+  Scenario: Disable log
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-wordpress-bridge" is installed (from src)
+    And the plugin "ifttt-wordpress-bridge" is activated
+    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
+    And I sent a request via IFTTT
+    And I am logged as an administrator
+    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    And I uncheck "ifttt_wordpress_bridge_options_log_enabled"
+    And I press "submit"
+    Then I should see the message "Settings saved"
+    And I should see an "#ifttt-wordpress-bridge-log" element having an attribute "disabled" with value "disabled"
+    And the "ifttt-wordpress-bridge-log" field should contain ""

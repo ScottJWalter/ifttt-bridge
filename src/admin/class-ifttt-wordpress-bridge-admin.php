@@ -52,6 +52,7 @@ class Ifttt_Wordpress_Bridge_Admin {
 
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+		add_action( 'admin_init', array( $this, 'register_options_setting' ) );
 
 		// Add an action link pointing to the options page.
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
@@ -102,9 +103,33 @@ class Ifttt_Wordpress_Bridge_Admin {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
+		$options = get_option( 'ifttt_wordpress_bridge_options' );
+		$this->log_enabled = $options && array_key_exists( 'log_enabled', $options ) && $options['log_enabled'] == true;
 		$this->log = get_option( 'ifttt_wordpress_bridge_log', array() );
 		include_once( 'views/admin.php' );
 	}
+
+	/**
+	 * Registers the settings.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_options_setting() {
+		register_setting( 'ifttt_wordpress_bridge_options_group', 'ifttt_wordpress_bridge_options', array( $this, 'validate_options' ) );
+	}
+
+	/**
+	 * Validates the options. Clears the log if log has been disabled.
+	 *
+	 * @since    1.0.0
+	 */
+	public function validate_options( $options ) {
+		if ( $options['log_enabled'] == false ) {
+			delete_option( 'ifttt_wordpress_bridge_log' );
+		}
+		return $options;
+	}
+
 
 	/**
 	 * Add settings action link to the plugins page.

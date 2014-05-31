@@ -170,7 +170,6 @@ class FeatureContext extends MinkContext {
 	 * @Given /^the option "([^"]*)" has the value "([^"]*)"$/
 	 */
 	public function set_option( $option_name, $option_value ) {
-		var_dump($option_value);
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name AND option_value = :option_value' );
 		$stmt->execute( array( ':option_name' => $option_name, ':option_value' => $option_value ) );
@@ -285,6 +284,21 @@ class FeatureContext extends MinkContext {
 		}
 	}
 
+	/**
+	 * @Given /I should see an "([^"]*)" element having an attribute "([^"]*)" with value "([^"]*)"$/
+	 */
+	public function assert_element_having_attribute( $selector, $attribute_name, $attribute_value ) {
+		$element = $this->get_page()->find( 'css', $selector );
+		assertEquals( $attribute_value, $element->getAttribute( $attribute_name ) );
+	}
+
+	/**
+	 * @Given /I should see an "([^"]*)" element not having an attribute "([^"]*)" with value "([^"]*)"$/
+	 */
+	public function assert_element_not_having_attribute( $selector, $attribute_name, $attribute_value ) {
+		$element = $this->get_page()->find( 'css', $selector );
+		assertNotEquals( $attribute_value, $element->getAttribute( $attribute_name ) );
+	}
 
 	private function wp_hash( $data, $scheme = 'auth' ) {
 		$salt = $this->wp_salt( $scheme );
