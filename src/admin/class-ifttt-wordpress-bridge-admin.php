@@ -53,6 +53,7 @@ class Ifttt_Wordpress_Bridge_Admin {
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'register_options_setting' ) );
+		add_action( 'admin_post_sent_post_request', array( $this, 'send_test_request' ) );
 
 		// Add an action link pointing to the options page.
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
@@ -106,6 +107,7 @@ class Ifttt_Wordpress_Bridge_Admin {
 		$options = get_option( 'ifttt_wordpress_bridge_options' );
 		$this->log_enabled = $options && array_key_exists( 'log_enabled', $options ) && $options['log_enabled'] == true;
 		$this->log = get_option( 'ifttt_wordpress_bridge_log', array() );
+		$this->send_test_request_url = get_site_url() . '/wp-content/plugins/ifttt-wordpress-bridge/send_test_request.php';
 		include_once( 'views/admin.php' );
 	}
 
@@ -130,6 +132,21 @@ class Ifttt_Wordpress_Bridge_Admin {
 		return $options;
 	}
 
+	/**
+	 * Send a test request to this WordPress instance.
+	 */
+	public function send_test_request() {
+		$url = get_site_url() . '/xmlrpc.php';
+		$xml = file_get_contents( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'test_request_template.xml' );
+		$options = array();
+		$options['body'] = $xml;
+		$response = wp_safe_remote_post( $url, $options );
+		add_settings_error( null, null, _x( 'Test request sent', 'Success message', $this->plugin_slug ), 'updated' );
+		set_transient( 'settings_errors', get_settings_errors(), 30 );
+		$goback = add_query_arg( 'settings-updated', 'true',  wp_get_referer() );
+		wp_redirect( $goback );
+		exit;
+	}
 
 	/**
 	 * Add settings action link to the plugins page.

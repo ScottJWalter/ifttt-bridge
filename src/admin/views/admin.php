@@ -16,6 +16,7 @@
 <div class="wrap">
 	<?php screen_icon(); ?>
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+	<h3><?php _ex( 'Configuration', 'Heading', $this->plugin_slug ) ?></h3>
 	<form method="post" action="options.php">
 <?php
 	settings_fields( 'ifttt_wordpress_bridge_options_group' );
@@ -43,5 +44,11 @@ foreach ( $this->log as $log_entry ) {
 			</tbody>
 		</table>
 		<?php submit_button(); ?>
+	</form>
+	<h3><?php _ex( 'Send test request', 'Heading', $this->plugin_slug ) ?></h3>
+	<form action="admin-post.php" method="post">
+	  <input type="hidden" name="action" value="sent_post_request">
+	  <input type="hidden" name="redirect_url" value="sent_post_request">
+		<?php submit_button( _x( 'Send request', 'Button label', $this->plugin_slug ), 'primary', 'send-test-request' ); ?>
 	</form>
 </div>
