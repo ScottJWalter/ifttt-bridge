@@ -158,9 +158,19 @@ class FeatureContext extends MinkContext {
 	}
 
 	/**
+	 * @Given /^the option "([^"]*)" has the serialized value ([^']*)$/
+	 */
+	public function set_serialized_option( $option_name, $option_value ) {
+		$option_value_obj = json_decode( $option_value, true );
+		$serialized = serialize( $option_value_obj );
+		$this->set_option( $option_name, $serialized );
+	}
+
+	/**
 	 * @Given /^the option "([^"]*)" has the value "([^"]*)"$/
 	 */
 	public function set_option( $option_name, $option_value ) {
+		var_dump($option_value);
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name AND option_value = :option_value' );
 		$stmt->execute( array( ':option_name' => $option_name, ':option_value' => $option_value ) );

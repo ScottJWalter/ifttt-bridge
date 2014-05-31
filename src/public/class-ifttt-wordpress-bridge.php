@@ -110,6 +110,8 @@ class Ifttt_Wordpress_Bridge {
 	 * @since   1.0.0
 	 */
 	public function bridge( $method ) {
+		$options = get_option( 'ifttt_wordpress_bridge_options' );
+		$this->log_enabled = $options && array_key_exists( 'log_enabled', $options ) && $options['log_enabled'] == true;
 		$this->log( 'xmlrpc call received' );
 		try {
 			if ( $method != 'metaWeblog.newPost' ) {
@@ -189,6 +191,9 @@ class Ifttt_Wordpress_Bridge {
 	 * @since   1.0.0
 	 */
 	private function log( $content ) {
+		if ( true !== $this->log_enabled ) {
+			return;
+		}
 		$log_array = get_option( 'ifttt_wordpress_bridge_log' );
 		if ( $log_array ) {
 			if ( count( $log_array ) == 30 ) {

@@ -7,6 +7,7 @@ Feature: Log the processing of the IFTTT xmlrcp call
     Given a fresh WordPress is installed
     And the plugin "ifttt-wordpress-bridge" is installed (from src)
     And the plugin "ifttt-wordpress-bridge" is activated
+    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
     When I sent a request via IFTTT
     Then the log contains
       | Successfully called 'ifttt_wordpress_bridge' actions |
@@ -14,12 +15,20 @@ Feature: Log the processing of the IFTTT xmlrcp call
       | Raw data: %DESCRIPTION% |
       | xmlrpc call received |
 
+  Scenario: Don't log IFTTT request if log is disabled
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-wordpress-bridge" is installed (from src)
+    And the plugin "ifttt-wordpress-bridge" is activated
+    When I sent a request via IFTTT
+    Then the option "ifttt_wordpress_bridge_log" should not exist
+
   Scenario: Log exception
     Given a fresh WordPress is installed
     And the plugin "ifttt-wordpress-bridge" is installed (from src)
     And the plugin "ifttt-wordpress-bridge" is activated
     And the plugin "ifttt-wordpress-bridge-testplugin" is installed (from features/plugins/ifttt-wordpress-bridge-testplugin.php)
     And the plugin "ifttt-wordpress-bridge-testplugin" is activated
+    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
     And the option "ifttt_wordpress_bridge_testplugin_scenario" has the value "throw_exception"
     When I sent a request via IFTTT
     Then the log contains
@@ -32,6 +41,7 @@ Feature: Log the processing of the IFTTT xmlrcp call
     Given a fresh WordPress is installed
     And the plugin "ifttt-wordpress-bridge" is installed (from src)
     And the plugin "ifttt-wordpress-bridge" is activated
+    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
     And I am logged as an administrator
     When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
     Then the "ifttt-wordpress-bridge-log" field should contain ""
@@ -40,6 +50,7 @@ Feature: Log the processing of the IFTTT xmlrcp call
     Given a fresh WordPress is installed
     And the plugin "ifttt-wordpress-bridge" is installed (from src)
     And the plugin "ifttt-wordpress-bridge" is activated
+    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
     And I sent a request via IFTTT
     And I am logged as an administrator
     When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
