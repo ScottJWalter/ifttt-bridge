@@ -9,9 +9,13 @@ Feature: Log the processing of the IFTTT xmlrcp call
     And the plugin "ifttt-wordpress-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
     When I sent a request via IFTTT
+      | title       | This is a title |
+      | description | And this is a description |
+      | post_status | draft |
+      | tags | foo, bar |
     Then the log contains
       | Successfully called 'ifttt_wordpress_bridge' actions |
-      | Received data: {"title":"%TITLE%","description":"%DESCRIPTION%","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
+      | Received data: {"title":"This is a title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge","foo","bar"]} |
       | xmlrpc call received |
 
   Scenario: Don't log IFTTT request if log is disabled
@@ -30,10 +34,13 @@ Feature: Log the processing of the IFTTT xmlrcp call
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
     And the option "ifttt_wordpress_bridge_testplugin_scenario" has the value "throw_exception"
     When I sent a request via IFTTT
+      | title       | This is a title |
+      | description | And this is a description |
+      | post_status | draft |
     Then the log contains
       | An error occurred: Error processing ifttt_wordpress_bridge action |
-      | Received data: {"title":"%TITLE%","description":"%DESCRIPTION%","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
-            | xmlrpc call received |
+      | Received data: {"title":"This is a title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
+      | xmlrpc call received |
 
   Scenario: See empty log
     Given a fresh WordPress is installed
@@ -50,11 +57,14 @@ Feature: Log the processing of the IFTTT xmlrcp call
     And the plugin "ifttt-wordpress-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
     And I sent a request via IFTTT
+      | title       | This is a title |
+      | description | And this is a description |
+      | post_status | draft |
     And I am logged as an administrator
     When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
     Then I should see
       | Successfully called 'ifttt_wordpress_bridge' actions |
-      | Received data: {"title":"%TITLE%","description":"%DESCRIPTION%","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
+      | Received data: {"title":"This is a title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
       | xmlrpc call received |
 
   Scenario: Log disabled on admin page

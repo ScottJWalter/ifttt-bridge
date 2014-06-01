@@ -18,6 +18,6 @@ Feature: Send test requests
     Then I should see "Test request sent"
     And the log contains
       | Successfully called 'ifttt_wordpress_bridge' actions |
-      | Received data: {"title":"This is a title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
+      | Received data: {"title":"This is a title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge","foo","bar"]} |
       | xmlrpc call received |
 

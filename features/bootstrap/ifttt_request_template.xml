@@ -23,19 +23,19 @@
           <member>
             <name>title</name>
             <value>
-              <string>%TITLE%</string>
+              <string>Replace me!</string>
             </value>
           </member>
           <member>
             <name>description</name>
             <value>
-              <string>%DESCRIPTION%</string>
+              <string>Replace me!</string>
             </value>
           </member>
           <member>
             <name>post_status</name>
             <value>
-              <string>draft</string>
+              <string>Replace me!</string>
             </value>
           </member>
           <member>
