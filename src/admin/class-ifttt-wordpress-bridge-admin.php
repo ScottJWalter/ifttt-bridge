@@ -138,12 +138,12 @@ class Ifttt_Wordpress_Bridge_Admin {
 	public function send_test_request() {
 		$url = get_site_url() . '/xmlrpc.php';
 		$variables = array(
-			'username' => $_POST['test-request-username'],
-			'password' => $_POST['test-request-password'],
-			'title' => $_POST['test-request-title'],
-			'description' => $_POST['test-request-description'],
-			'post_status' => array_key_exists( 'test-request-draft', $_POST ) & $_POST['test-request-draft'] == 1 ? 'draft' : 'publish',
-			'tags' => $_POST['test-request-tags'],
+			'username' => stripslashes($_POST['test-request-username']),
+			'password' => stripslashes($_POST['test-request-password']),
+			'title' => stripslashes($_POST['test-request-title']),
+			'description' => stripslashes($_POST['test-request-description']),
+			'post_status' => @$_POST['test-request-draft'] == 1 ? 'draft' : 'publish',
+			'tags' => stripslashes($_POST['test-request-tags']),
 		);
 		$template = file_get_contents( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'test_request_template.xml' );
 		$options = array( 'body' => $this->create_xml( $template, $variables ) );

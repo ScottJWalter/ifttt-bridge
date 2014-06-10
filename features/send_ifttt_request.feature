@@ -20,4 +20,4 @@ Feature: Send request via IFTTT
     And the plugin "ifttt-wordpress-bridge-testplugin" is activated
     And the option "ifttt_wordpress_bridge_testplugin_scenario" has the value "add_option"
     When I sent a request via IFTTT
-    Then the option "ifttt_wordpress_bridge_testplugin_option" should have the value "true"
+    Then the option "ifttt_wordpress_bridge_testplugin_option" should have the value "It's IFTTT, dude!"

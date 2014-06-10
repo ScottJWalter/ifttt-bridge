@@ -13,6 +13,7 @@ trait InstallationSteps {
 		$this->wp_config_replacements['LOGGED_IN_SALT']   = 'z%vk: dd+>FKGFJ:6Z4c(<JnHZL6%i=tSO%=^+rHtPi<&WAr@2Cl67Jqo:7MKtOE';
 		$this->wp_config_replacements['NONCE_SALT']       = '/2K@9/*3M&;.2[RJ8$V0L[MmId.<x}R< 7/0 K=mgy=:89],Z2<~LE4(Cs%?!sjd';
 		$this->wp_config_replacements['WPLANG']           = '';
+		$this->wp_config_replacements['WP_DEBUG']         = 'true';
 	}
 
 	/**
@@ -112,6 +113,9 @@ trait InstallationSteps {
 					$this->write_to_file( $target_handle, "\r\n" );
 				}
 				$this->write_to_file( $target_handle, $line );
+				if ( preg_match( "/define\\('WP_DEBUG', \w*\\);/", $line ) ) {
+					$this->write_to_file( $target_handle, "define('WP_DEBUG_LOG', true);\n" );
+				}
 			} 
 		} finally {
 			fclose( $source_handle );
@@ -120,7 +124,7 @@ trait InstallationSteps {
 	}
 
 	private function replace_config_value( $line ) {
-		if ( ! preg_match( '/^define\(\'([^\']*)\',[ ]*\'([^\']*)\'\);/', $line, $matches ) ) {
+		if ( ! preg_match( '/^define\(\'([^\']*)\',[ ]*\'?([^\']*)\'?\);/', $line, $matches ) ) {
 			return $line;
 		}
 		$key   = $matches[1];
