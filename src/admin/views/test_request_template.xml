@@ -9,12 +9,12 @@
     </param>
     <param>
       <value>
-        <string>admin</string>
+        <string>${username}</string>
       </value>
     </param>
     <param>
       <value>
-        <string>admin</string>
+        <string>${password}</string>
       </value>
     </param>
     <param>

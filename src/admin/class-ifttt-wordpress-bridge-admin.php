@@ -138,6 +138,8 @@ class Ifttt_Wordpress_Bridge_Admin {
 	public function send_test_request() {
 		$url = get_site_url() . '/xmlrpc.php';
 		$variables = array(
+			'username' => $_POST['test-request-username'],
+			'password' => $_POST['test-request-password'],
 			'title' => $_POST['test-request-title'],
 			'description' => $_POST['test-request-description'],
 			'post_status' => array_key_exists( 'test-request-draft', $_POST ) & $_POST['test-request-draft'] == 1 ? 'draft' : 'publish',
@@ -174,24 +176,18 @@ class Ifttt_Wordpress_Bridge_Admin {
 		$doc = new DOMDocument();
 		$doc->loadXML( $xml_template );
 		$xpath = new DOMXPath( $doc );
-		if ( array_key_exists( 'title' , $variables ) ) {
-			$xpath->query( '/methodCall/params/param[4]/value/struct/member[name="title"]/value/string' )->item( 0 )->firstChild->nodeValue = $variables['title'];
-		}
-		if ( array_key_exists( 'description' , $variables ) ) {
-			$xpath->query( '/methodCall/params/param[4]/value/struct/member[name="description"]/value/string' )->item( 0 )->firstChild->nodeValue = $variables['description'];
-		}
-		if ( array_key_exists( 'post_status' , $variables ) ) {
-			$xpath->query( '/methodCall/params/param[4]/value/struct/member[name="post_status"]/value/string' )->item( 0 )->firstChild->nodeValue = $variables['post_status'];
-		}
-		if ( array_key_exists( 'tags' , $variables ) ) {
-			$mt_keywords_data = $xpath->query( '/methodCall/params/param[4]/value/struct/member[name="mt_keywords"]/value/array/data' )->item( 0 );
-			$tag_value = $xpath->query( '/methodCall/params/param[4]/value/struct/member[name="mt_keywords"]/value/array/data/value' )->item( 0 );
-			$tags = array_map( 'trim', explode( ',', $variables['tags'] ) );
-			foreach ( $tags as $tag ) {
-				$new_tag_value = $tag_value->cloneNode( true );
-				$new_tag_value->nodeValue = $tag;
-				$mt_keywords_data->appendChild( $new_tag_value );
-			}
+		$xpath->query( '/methodCall/params/param[2]/value/string' )->item( 0 )->firstChild->nodeValue = $variables['username'];
+		$xpath->query( '/methodCall/params/param[3]/value/string' )->item( 0 )->firstChild->nodeValue = $variables['password'];
+		$xpath->query( '/methodCall/params/param[4]/value/struct/member[name="title"]/value/string' )->item( 0 )->firstChild->nodeValue = $variables['title'];
+		$xpath->query( '/methodCall/params/param[4]/value/struct/member[name="description"]/value/string' )->item( 0 )->firstChild->nodeValue = $variables['description'];
+		$xpath->query( '/methodCall/params/param[4]/value/struct/member[name="post_status"]/value/string' )->item( 0 )->firstChild->nodeValue = $variables['post_status'];
+		$mt_keywords_data = $xpath->query( '/methodCall/params/param[4]/value/struct/member[name="mt_keywords"]/value/array/data' )->item( 0 );
+		$tag_value = $xpath->query( '/methodCall/params/param[4]/value/struct/member[name="mt_keywords"]/value/array/data/value' )->item( 0 );
+		$tags = array_map( 'trim', explode( ',', $variables['tags'] ) );
+		foreach ( $tags as $tag ) {
+			$new_tag_value = $tag_value->cloneNode( true );
+			$new_tag_value->nodeValue = $tag;
+			$mt_keywords_data->appendChild( $new_tag_value );
 		}
 		return $doc->saveXML();
 	}

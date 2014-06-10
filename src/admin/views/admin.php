@@ -52,6 +52,14 @@ foreach ( $this->log as $log_entry ) {
 		<table class="form-table">
 			<tbody>
 				<tr>
+					<th scope="row"><label for="test-request-username"><?php _ex( 'Username', 'Test request form label', $this->plugin_slug ); ?></label></th>
+					<td><input type="text" class="regular-text" id="test-request-username" name="test-request-username"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="test-request-password"><?php _ex( 'Password', 'Test request form label', $this->plugin_slug ); ?></label></th>
+					<td><input type="password" class="regular-text" id="test-request-password" name="test-request-password"></td>
+				</tr>
+				<tr>
 					<th scope="row"><label for="test-request-title"><?php _ex( 'Title', 'Test request form label', $this->plugin_slug ); ?></label></th>
 					<td><input type="text" class="regular-text" id="test-request-title" name="test-request-title"></td>
 				</tr>

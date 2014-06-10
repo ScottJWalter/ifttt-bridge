@@ -10,6 +10,8 @@ Feature: Send test requests
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_enabled": true }
     And I am logged as an administrator
     When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    And I fill in "test-request-username" with "admin"
+    And I fill in "test-request-password" with "admin"
     And I fill in "test-request-title" with "This is a title"
     And I fill in "test-request-description" with "And this is a description"
     And I fill in "test-request-tags" with "foo, bar"
