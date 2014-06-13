@@ -124,7 +124,14 @@ class Ifttt_Wordpress_Bridge {
 				$this->log( "Tag 'ifttt_wordpress_bridge' not found" );
 				return;
 			}
-			$this->log( 'Received data: ' . json_encode( $content_struct ) );
+			if ( $this->log_enabled ) {
+				$content_struct_log  = "Received data:\n";
+				$content_struct_log .= '  title: ' . $content_struct['title'] . "\n";
+				$content_struct_log .= '  description: ' . $content_struct['description'] . "\n";
+				$content_struct_log .= '  post_status: ' . $content_struct['post_status'] . "\n";
+				$content_struct_log .= '  mt_keywords: ' . implode( ', ', $content_struct['mt_keywords'] );
+				$this->log( $content_struct_log );
+			}
 			do_action( 'ifttt_wordpress_bridge', $content_struct );
 			$this->log( "Successfully called 'ifttt_wordpress_bridge' actions" );
 			header( 'Content-Type: text/xml; charset=UTF-8' );

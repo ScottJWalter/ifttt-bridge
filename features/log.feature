@@ -13,10 +13,17 @@ Feature: Log the processing of the IFTTT xmlrcp call
       | description | And this is a description |
       | post_status | draft |
       | tags | foo, bar |
+    Then the log contains 3 entries
+    Then the log contains "Successfully called 'ifttt_wordpress_bridge' actions"
+    Then the log contains "xmlrpc call received"
     Then the log contains
-      | Successfully called 'ifttt_wordpress_bridge' actions |
-      | Received data: {"title":"This is a title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge","foo","bar"]} |
-      | xmlrpc call received |
+      """
+      Received data:
+        title: This is a title
+        description: And this is a description
+        post_status: draft
+        mt_keywords: ifttt_wordpress_bridge, foo, bar
+      """
 
   Scenario: Don't log IFTTT request if log is disabled
     Given a fresh WordPress is installed
@@ -37,10 +44,8 @@ Feature: Log the processing of the IFTTT xmlrcp call
       | title       | This is a title |
       | description | And this is a description |
       | post_status | draft |
-    Then the log contains
-      | An error occurred: Error processing ifttt_wordpress_bridge action |
-      | Received data: {"title":"This is a title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
-      | xmlrpc call received |
+    Then the log contains 3 entries
+    Then the log contains "An error occurred: Error processing ifttt_wordpress_bridge action"
 
   Scenario: See empty log
     Given a fresh WordPress is installed
@@ -64,8 +69,15 @@ Feature: Log the processing of the IFTTT xmlrcp call
     When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
     Then I should see
       | Successfully called 'ifttt_wordpress_bridge' actions |
-      | Received data: {"title":"This is a title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"]} |
       | xmlrpc call received |
+    And I should see
+      """
+      Received data:
+        title: This is a title
+        description: And this is a description
+        post_status: draft
+        mt_keywords: ifttt_wordpress_bridge
+      """
 
   Scenario: Log disabled on admin page
     Given a fresh WordPress is installed

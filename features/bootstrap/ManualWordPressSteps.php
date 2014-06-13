@@ -64,10 +64,18 @@ trait ManualWordPressSteps {
 	/**
 	* @Given /^I should see$/
 	*/
-	public function assert_page_contains_all( $table ) {
-		$rows = $table->getRows();
-		foreach ( $rows as $row ) {
-			$this->assertPageContainsText( $row[0] );
+	public function assert_page_contains_all( $mixed ) {
+		if ( is_a( $mixed, 'Behat\Gherkin\Node\TableNode' ) ) {
+			$rows = $mixed->getRows();
+			foreach ( $rows as $row ) {
+				$this->assertPageContainsText( $row[0] );
+			}
+		} elseif ( is_a( $mixed, 'Behat\Gherkin\Node\PyStringNode' ) ) {
+			foreach ( $mixed->getLines() as $line ) {
+				$this->assertPageContainsText( trim($line) );
+			}
+		} else {
+			throw new Exception( 'Unexpected type' );
 		}
 	}
 

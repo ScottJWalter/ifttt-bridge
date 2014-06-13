@@ -76,20 +76,35 @@ trait DatabaseSteps {
 	}
 
 	/**
-	 * @Given /the log contains$/
+	 * @Given /the log contains (\d*) entries$/
 	 */
-	public function assert_log( $table ) {
-		$expected_entries = $table->getRows();
+	public function assert_num_of_log_entries( $num_of_log_entries ) {
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'ifttt_wordpress_bridge_log' ) );
 		$result = $this->fetch_all( $stmt );
 		assertEquals( count( $result ), 1, "Option 'ifttt_wordpress_bridge_log' doesn't exists" );
 		$log_entries = unserialize( $result[0]['option_value'] );
-		assertEquals( count( $expected_entries ), count( $log_entries ) );
-		for ( $i = 0; $i < count( $expected_entries ); $i++ ) {
-			assertEquals( $expected_entries[$i][0], $log_entries[$i] );
+		assertEquals( $num_of_log_entries, count( $log_entries ) );
+	}
+
+	/**
+	 * @Given /the log contains "([^"]*)"$/
+	 * @Given /the log contains$/
+	 */
+	public function assert_log( $expected_log_entry ) {
+		$pdo  = $this->create_pdo();
+		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
+		$stmt->execute( array( ':option_name' => 'ifttt_wordpress_bridge_log' ) );
+		$result = $this->fetch_all( $stmt );
+		assertEquals( count( $result ), 1, "Option 'ifttt_wordpress_bridge_log' doesn't exists" );
+		$log_entries = unserialize( $result[0]['option_value'] );
+		for ( $i = 0, $count_log_entries = count( $log_entries ); $i < $count_log_entries; $i++ ) {
+			if ( $expected_log_entry == $log_entries[$i] ) {
+				return;
+			}
 		}
+		PHPUnit_Framework_Assert::fail( "Log entry '$expected_log_entry' not found in log " . json_encode( $log_entries ) );
 	}
 
 	private function create_pdo() {
