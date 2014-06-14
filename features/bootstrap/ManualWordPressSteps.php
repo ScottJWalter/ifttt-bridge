@@ -72,7 +72,7 @@ trait ManualWordPressSteps {
 			}
 		} elseif ( is_a( $mixed, 'Behat\Gherkin\Node\PyStringNode' ) ) {
 			foreach ( $mixed->getLines() as $line ) {
-				$this->assertPageContainsText( trim($line) );
+				$this->assertPageContainsText( trim( $line ) );
 			}
 		} else {
 			throw new Exception( 'Unexpected type' );

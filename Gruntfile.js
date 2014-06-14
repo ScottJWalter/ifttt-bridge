@@ -6,7 +6,8 @@ module.exports = function(grunt) {
       options: {
         text_domain: 'ifttt-wordpress-bridge',
         dest: 'build/ifttt-wordpress-bridge.pot',
-        keywords: ['__', '_e', '_x:1,2c']
+        keywords: ['__', '_e', '_x:1,2c', '_ex:1,2c'],
+        encoding: 'UTF-8'
       },
       files: {
         src:  [ 'src/**/*.php' ],
