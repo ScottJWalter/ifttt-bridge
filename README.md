@@ -5,8 +5,6 @@ Project description
 -------------------
 This plugin contains a WordPress plugin in a source folder and additional build and test resources. If you want to use the project files as a WordPress plugin use only the files in the **src** folder!
 
-The official WordPress project is [http://wordpress.org/extend/plugins/ifttt-wordpress-bridge](http://wordpress.org/extend/plugins/ifttt-wordpress-bridge).
-
 Plugin description
 ------------------
 When using IFTTT with WordPress you can just post new posts. This plugin helps you to do whatever you like. Configure your IFTTT job in a predefined way in you get any information you like in a WordPress action.
