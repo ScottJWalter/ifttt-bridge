@@ -9,6 +9,12 @@ Plugin description
 ------------------
 When using IFTTT with WordPress you can just post new posts. This plugin helps you to do whatever you like. Configure your IFTTT job in a predefined way in you get any information you like in a WordPress action.
 
+Installation
+------------
+1. Upload plugin to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. Configure plugin (Settings -> IFTTT WordPress Bridge)
+
 Build
 -----
 This project contains files to use **Composer** and **Grunt**:

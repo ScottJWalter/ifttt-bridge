@@ -28,8 +28,9 @@
 					<th scope="row" colspan="2" class="th-full">
 						<label for="ifttt_wordpress_bridge_options_log_enabled">
 							<input name="ifttt_wordpress_bridge_options[log_enabled]" type="checkbox" id="ifttt_wordpress_bridge_options_log_enabled" value="1"<?php checked( '1', $this->log_enabled ); ?> />
-							<?php _e( 'Log enabled' ); ?>
+							<?php _e( 'Enable logging' ); ?>
 						</label>
+						<p class="description"><?php _e('This is recommended when you setup a process based on the IFTTT WordPress Bridge the first time. In the field below you can see helpful information about how the IFTTT request is processed.' ); ?></p>
 					</th>
 				</tr>
 				<tr>
@@ -46,6 +47,7 @@ foreach ( $this->log as $log_entry ) {
 		<?php submit_button(); ?>
 	</form>
 	<h3><?php _ex( 'Send test request', 'Heading', $this->plugin_slug ) ?></h3>
+	<p class="description"><?php _e( 'Send a test request if you want to make sure that your WordPress installation is ready for IFTTT. Use the form below to send a request which is identical to the ones sent by IFTTT.') ?></p>
 	<form action="admin-post.php" method="post">
 	  <input type="hidden" name="action" value="sent_post_request">
 	  <input type="hidden" name="redirect_url" value="sent_post_request">

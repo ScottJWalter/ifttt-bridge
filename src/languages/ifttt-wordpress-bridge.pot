@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ifttt-wordpress-bridge 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-14 15:20+0700\n"
+"POT-Creation-Date: 2014-06-14 16:47+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,52 +37,66 @@ msgid "Configuration"
 msgstr ""
 
 #: src/admin/views/admin.php:31
-msgid "Log enabled"
+msgid "Enable logging"
 msgstr ""
 
-#: src/admin/views/admin.php:48
+#: src/admin/views/admin.php:33
+msgid ""
+"This is recommended when you setup a process based on the IFTTT WordPress "
+"Bridge the first time. In the field below you can see helpful information "
+"about how the IFTTT request is processed."
+msgstr ""
+
+#: src/admin/views/admin.php:49
 msgctxt "Heading"
 msgid "Send test request"
 msgstr ""
 
-#: src/admin/views/admin.php:55
+#: src/admin/views/admin.php:50
+msgid ""
+"Send a test request if you want to make sure that your WordPress "
+"installation is ready for IFTTT. Use the form below to send a request which "
+"is identical to the ones sent by IFTTT."
+msgstr ""
+
+#: src/admin/views/admin.php:57
 msgctxt "Test request form label"
 msgid "Username"
 msgstr ""
 
-#: src/admin/views/admin.php:59
+#: src/admin/views/admin.php:61
 msgctxt "Test request form label"
 msgid "Password"
 msgstr ""
 
-#: src/admin/views/admin.php:63
+#: src/admin/views/admin.php:65
 msgctxt "Test request form label"
 msgid "Title"
 msgstr ""
 
-#: src/admin/views/admin.php:67
+#: src/admin/views/admin.php:69
 msgctxt "Test request form label"
 msgid "Description"
 msgstr ""
 
-#: src/admin/views/admin.php:71
+#: src/admin/views/admin.php:73
 msgctxt "Test request form label"
 msgid "Tags"
 msgstr ""
 
-#: src/admin/views/admin.php:73
+#: src/admin/views/admin.php:75
 msgctxt "Test request form description"
 msgid ""
 "Comma-separated list. The label 'ifttt_wordpress_bridge' will be used "
 "automatically."
 msgstr ""
 
-#: src/admin/views/admin.php:77
+#: src/admin/views/admin.php:79
 msgctxt "Test request form label"
 msgid "Draft"
 msgstr ""
 
-#: src/admin/views/admin.php:82
+#: src/admin/views/admin.php:84
 msgctxt "Button label"
 msgid "Send request"
 msgstr ""
