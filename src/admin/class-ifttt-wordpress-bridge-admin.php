@@ -141,7 +141,7 @@ class Ifttt_Wordpress_Bridge_Admin {
 			'username' => stripslashes($_POST['test-request-username']),
 			'password' => stripslashes($_POST['test-request-password']),
 			'title' => stripslashes($_POST['test-request-title']),
-			'description' => stripslashes($_POST['test-request-description']),
+			'description' => stripslashes($_POST['test-request-body']),
 			'post_status' => @$_POST['test-request-draft'] == 1 ? 'draft' : 'publish',
 			'tags' => stripslashes($_POST['test-request-tags']),
 		);

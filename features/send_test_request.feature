@@ -13,16 +13,22 @@ Feature: Send test requests
     And I fill in the following:
       | test-request-username | admin |
       | test-request-password | admin |
-      | test-request-title | This is a title |
-      | test-request-description | And this is a description |
-      | test-request-tags | foo, bar |
+      | test-request-title    | This is a title |
+      | test-request-body     | And this is a description |
+      | test-request-tags     | foo, bar |
     And I check "test-request-draft"
     And I press "send-test-request"
     Then I should see "Test request sent"
+    And the log contains "Successfully called 'ifttt_wordpress_bridge' actions"
     And the log contains
-      | Successfully called 'ifttt_wordpress_bridge' actions |
-      | Received data: {"title":"This is a title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge","foo","bar"]} |
-      | xmlrpc call received |
+      """
+      Received data:
+        title: This is a title
+        description: And this is a description
+        post_status: draft
+        mt_keywords: ifttt_wordpress_bridge, foo, bar
+      """
+    And the log contains "xmlrpc call received"
 
   Scenario: Send quoted test request
     Given a fresh WordPress is installed
@@ -34,13 +40,19 @@ Feature: Send test requests
     And I fill in the following:
       | test-request-username | admin |
       | test-request-password | admin |
-      | test-request-title | This is a "quoted" title |
-      | test-request-description | And this is a description |
-      | test-request-tags | foo, bar |
+      | test-request-title    | This is a "quoted" title |
+      | test-request-body     | And this is a description |
+      | test-request-tags     | foo, bar |
     And I check "test-request-draft"
     And I press "send-test-request"
     Then I should see "Test request sent"
+    And the log contains "Successfully called 'ifttt_wordpress_bridge' actions"
     And the log contains
-      | Successfully called 'ifttt_wordpress_bridge' actions |
-      | Received data: {"title":"This is a \"quoted\" title","description":"And this is a description","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge","foo","bar"]} |
-      | xmlrpc call received |
+      """
+      Received data:
+        title: This is a "quoted" title
+        description: And this is a description
+        post_status: draft
+        mt_keywords: ifttt_wordpress_bridge, foo, bar
+      """
+    And the log contains "xmlrpc call received"

@@ -75,7 +75,14 @@ trait InstallationSteps {
 	private function prepare_wp_in_webserver() {
 		$this->extract_zip_to_dir( $this->install_file( 'wordpress' ), $this->temp_dir );
 		if ( is_dir( $this->webserver_dir ) ) {
-			$this->delete_file_or_dir( $this->webserver_dir );
+			for ( $i = 0; $i < 4; $i++ ) {
+				try {
+					$this->delete_file_or_dir( $this->webserver_dir );
+				} catch ( Exception $e ) {
+					sleep( .5 );
+				}
+				$this->delete_file_or_dir( $this->webserver_dir );
+			}
 		}
 		$this->move_file_or_dir( $this->path( $this->temp_dir, 'wordpress' ), $this->webserver_dir );
 	}
@@ -175,8 +182,11 @@ trait InstallationSteps {
 	}
 
 	private function delete_file_or_dir( $file_or_dir ) {
+		if ( ! file_exists( $file_or_dir ) ) {
+			return;
+		}
 		if ( is_file( $file_or_dir ) ) {
-			if ( ! unlink( $file_or_dir ) ) {
+			if ( ! @unlink( $file_or_dir ) ) {
 				throw new Exception( 'Can\'t delete file '.$file_or_dir );
 			}
 		} else {
@@ -186,7 +196,7 @@ trait InstallationSteps {
 				}
 				$this->delete_file_or_dir( $this->path( $file_or_dir, $found ) );
 			}
-			if ( ! rmdir( $file_or_dir ) ) {
+			if ( ! @rmdir( $file_or_dir ) ) {
 				throw new Exception( 'Can\'t delete directory '.$file_or_dir );
 			}
 		}

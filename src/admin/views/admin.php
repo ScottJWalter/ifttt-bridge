@@ -28,9 +28,9 @@
 					<th scope="row" colspan="2" class="th-full">
 						<label for="ifttt_wordpress_bridge_options_log_enabled">
 							<input name="ifttt_wordpress_bridge_options[log_enabled]" type="checkbox" id="ifttt_wordpress_bridge_options_log_enabled" value="1"<?php checked( '1', $this->log_enabled ); ?> />
-							<?php _e( 'Enable logging' ); ?>
+							<?php _e( 'Enable logging', $this->plugin_slug ); ?>
 						</label>
-						<p class="description"><?php _e('This is recommended when you setup a process based on the IFTTT WordPress Bridge the first time. In the field below you can see helpful information about how the IFTTT request is processed.' ); ?></p>
+						<p class="description"><?php _e( 'This is recommended when you setup a process based on the IFTTT WordPress Bridge the first time. In the field below you can see helpful information about how the IFTTT request is processed.', $this->plugin_slug ); ?></p>
 					</th>
 				</tr>
 				<tr>
@@ -47,7 +47,7 @@ foreach ( $this->log as $log_entry ) {
 		<?php submit_button(); ?>
 	</form>
 	<h3><?php _ex( 'Send test request', 'Heading', $this->plugin_slug ) ?></h3>
-	<p class="description"><?php _e( 'Send a test request if you want to make sure that your WordPress installation is ready for IFTTT. Use the form below to send a request which is identical to the ones sent by IFTTT.') ?></p>
+	<p class="description"><?php _e( 'Send a test request if you want to make sure that your WordPress installation is ready for IFTTT. Use the form below to send a request which is identical to the ones sent by IFTTT.', $this->plugin_slug ) ?></p>
 	<form action="admin-post.php" method="post">
 	  <input type="hidden" name="action" value="sent_post_request">
 	  <input type="hidden" name="redirect_url" value="sent_post_request">
@@ -66,13 +66,13 @@ foreach ( $this->log as $log_entry ) {
 					<td><input type="text" class="regular-text" id="test-request-title" name="test-request-title"></td>
 				</tr>
 				<tr>
-					<th scope="row"><label for="test-request-description"><?php _ex( 'Description', 'Test request form label', $this->plugin_slug ); ?></label></th>
-					<td><input type="text" class="regular-text" id="test-request-description" name="test-request-description"></td>
+					<th scope="row"><label for="test-request-body"><?php _ex( 'Body', 'Test request form label', $this->plugin_slug ); ?></label></th>
+					<td><input type="text" class="regular-text" id="test-request-body" name="test-request-body"></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="test-request-tags"><?php _ex( 'Tags', 'Test request form label', $this->plugin_slug ); ?></label></th>
 					<td><input type="text" class="regular-text" id="test-request-tags" name="test-request-tags">
-					<p class="description"><?php _ex( "Comma-separated list. The label 'ifttt_wordpress_bridge' will be used automatically.", 'Test request form description', $this->plugin_slug ); ?></p>
+					<p class="description"><?php _ex( "Comma-separated list. The tag 'ifttt_wordpress_bridge' will be used automatically.", 'Test request form description', $this->plugin_slug ); ?></p>
 					</td>
 				</tr>
 				<tr>

@@ -3,42 +3,43 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ifttt-wordpress-bridge 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-10 17:32+0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2014-07-10 17:33+0700\n"
+"Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/admin/class-ifttt-wordpress-bridge-admin.php:92
 #: src/admin/class-ifttt-wordpress-bridge-admin.php:93
 msgid "IFTTT WordPress Bridge"
-msgstr ""
+msgstr "IFTTT WordPress Bridge"
 
 #: src/admin/class-ifttt-wordpress-bridge-admin.php:151
 msgctxt "Success message"
 msgid "Test request sent"
-msgstr ""
+msgstr "Testanfrage wurde gesendet"
 
 #: src/admin/class-ifttt-wordpress-bridge-admin.php:166
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: src/admin/views/admin.php:19
 msgctxt "Heading"
 msgid "Configuration"
-msgstr ""
+msgstr "Konfiguration"
 
 #: src/admin/views/admin.php:31
 msgid "Enable logging"
-msgstr ""
+msgstr "Aktiviere Logging"
 
 #: src/admin/views/admin.php:33
 msgid ""
@@ -46,11 +47,14 @@ msgid ""
 "Bridge the first time. In the field below you can see helpful information "
 "about how the IFTTT request is processed."
 msgstr ""
+"Empfohlen, wenn du einen neuen Prozess basierend auf der IFTTT WordPress "
+"Bridge einrichtest. Im unterstehenden Feld werden dann nützliche "
+"Informationen darüber ausgegeben, wir die IFTTT-Anfrage verarbeitet wird."
 
 #: src/admin/views/admin.php:49
 msgctxt "Heading"
 msgid "Send test request"
-msgstr ""
+msgstr "Sende Testanfrage"
 
 #: src/admin/views/admin.php:50
 msgid ""
@@ -58,50 +62,62 @@ msgid ""
 "installation is ready for IFTTT. Use the form below to send a request which "
 "is identical to the ones sent by IFTTT."
 msgstr ""
+"Sende eine Testanfrage, um sicherzustellen, dass deine Blog bereit für IFTTT "
+"ist. Verwende das untenstehende Formular, um eine Anfrage zustellen, die "
+"identisch zu den Anfragen von IFTTT ist."
 
 #: src/admin/views/admin.php:57
 msgctxt "Test request form label"
 msgid "Username"
-msgstr ""
+msgstr "Benutzername"
 
 #: src/admin/views/admin.php:61
 msgctxt "Test request form label"
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: src/admin/views/admin.php:65
 msgctxt "Test request form label"
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: src/admin/views/admin.php:69
 msgctxt "Test request form label"
 msgid "Body"
-msgstr ""
+msgstr "Inhalt"
 
 #: src/admin/views/admin.php:73
 msgctxt "Test request form label"
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: src/admin/views/admin.php:75
+#, fuzzy
 msgctxt "Test request form description"
 msgid ""
 "Comma-separated list. The tag 'ifttt_wordpress_bridge' will be used "
 "automatically."
 msgstr ""
+"Komma-separierte Liste. Das Tag 'ifttt_wordpress_bridge' wird automatisch "
+"gesetzt."
 
 #: src/admin/views/admin.php:79
 msgctxt "Test request form label"
 msgid "Draft"
-msgstr ""
+msgstr "Entwurf"
 
 #: src/admin/views/admin.php:84
 msgctxt "Button label"
 msgid "Send request"
-msgstr ""
-
+msgstr "Sende Anfrage"
 
 #: Project description
-msgid "When using IFTTT with WordPress you can just post new posts. This plugin helps you to do whatever you like. Configure your IFTTT job in a predefined way in you get any information you like in a WordPress action."
+msgid ""
+"When using IFTTT with WordPress you can just post new posts. This plugin "
+"helps you to do whatever you like. Configure your IFTTT job in a predefined "
+"way in you get any information you like in a WordPress action."
 msgstr ""
+
+#~ msgctxt "Test request form label"
+#~ msgid "Description"
+#~ msgstr "Beschreibung"
