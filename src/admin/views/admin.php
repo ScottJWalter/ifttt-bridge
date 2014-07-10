@@ -55,9 +55,9 @@
 			<tbody>
 				<?php foreach ( $this->log_entries as $log_entry ) { ?>
 				<tr>
-					<td><?php echo $log_entry['time']; ?></td>
-					<td><?php echo $log_entry['level']; ?></td>
-					<td><?php echo $log_entry['message']; ?></td>
+					<td><pre><?php echo $log_entry['time']; ?></pre></td>
+					<td><pre><?php echo $log_entry['level']; ?></pre></td>
+					<td><pre><?php echo $log_entry['message']; ?></pre></td>
 				</tr>
 				<?php } ?>
 			</tbody>

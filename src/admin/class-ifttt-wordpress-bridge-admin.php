@@ -109,19 +109,10 @@ class Ifttt_Wordpress_Bridge_Admin {
 		$this->log_level   = $options && array_key_exists( 'log_level', $options ) ? $options['log_level'] : 'off';
 		$this->log_entries = array();
 		foreach ( $log as $log_entry ) {
-			$message = '';
-			$message_lines = explode( "\n", $log_entry['message'] );
-			foreach ( $message_lines as $message_line ) {
-				if ( 0 === strpos( $message_line, '  ' ) ) {
-					$message .= "&nbsp;&nbsp;&nbsp;&nbsp;$message_line<br />\n";
-				} else {
-					$message .= "$message_line<br />\n";
-				}
-			}
 			$this->log_entries[] = array(
 				'time' => date_i18n( _x( 'Y/m/d h:i:s A', 'Date time pattern', $this->plugin_slug ) ),
 				'level' => $log_entry['level'],
-				'message' => $message,
+				'message' => $log_entry['message'],
 			);
 		}
 		$this->send_test_request_url = get_site_url() . '/wp-content/plugins/ifttt-wordpress-bridge/send_test_request.php';

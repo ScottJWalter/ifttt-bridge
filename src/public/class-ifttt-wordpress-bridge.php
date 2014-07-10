@@ -169,6 +169,9 @@ class Ifttt_Wordpress_Bridge {
 		} else {
 			$data =& $HTTP_RAW_POST_DATA;
 		}
+		if ( $this->log_enabled( 'debug' ) ) {
+			$this->log( 'debug', "Received request:\n" . htmlspecialchars( $data ) );
+		}
 		$message = new IXR_Message( $data );
 		$message->parse();
 		return $message;
@@ -233,9 +236,9 @@ class Ifttt_Wordpress_Bridge {
 		$log_array = get_option( 'ifttt_wordpress_bridge_log' );
 		if ( $log_array ) {
 			if ( count( $log_array ) == 30 ) {
-				array_pop( $log_array );
+				array_shift( $log_array );
 			}
-			array_unshift( $log_array, $log_entry );
+			array_push( $log_array, $log_entry );
 			update_option( 'ifttt_wordpress_bridge_log', $log_array );
 		} else {
 			$log_array = array( $log_entry );
