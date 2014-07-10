@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ifttt-wordpress-bridge 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-10 17:32+0700\n"
+"POT-Creation-Date: 2014-07-11 03:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,81 +22,97 @@ msgstr ""
 msgid "IFTTT WordPress Bridge"
 msgstr ""
 
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:151
+#: src/admin/class-ifttt-wordpress-bridge-admin.php:122
+msgctxt "Date time pattern"
+msgid "Y/m/d h:i:s A"
+msgstr ""
+
+#: src/admin/class-ifttt-wordpress-bridge-admin.php:168
 msgctxt "Success message"
 msgid "Test request sent"
 msgstr ""
 
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:166
+#: src/admin/class-ifttt-wordpress-bridge-admin.php:183
 msgid "Settings"
 msgstr ""
 
-#: src/admin/views/admin.php:19
+#: src/admin/views/admin.php:20
 msgctxt "Heading"
-msgid "Configuration"
+msgid "Logging"
 msgstr ""
 
-#: src/admin/views/admin.php:31
-msgid "Enable logging"
-msgstr ""
-
-#: src/admin/views/admin.php:33
+#: src/admin/views/admin.php:21
 msgid ""
-"This is recommended when you setup a process based on the IFTTT WordPress "
-"Bridge the first time. In the field below you can see helpful information "
-"about how the IFTTT request is processed."
+"Logging is recommended when you setup a new process based on the IFTTT "
+"WordPress Bridge. In the field below you can see helpful information about "
+"how the IFTTT request is processed."
 msgstr ""
 
-#: src/admin/views/admin.php:49
+#: src/admin/views/admin.php:30
+msgctxt "Form label"
+msgid "Log level"
+msgstr ""
+
+#: src/admin/views/admin.php:45
+msgctxt "Heading"
+msgid "Log (max. 30 entries)"
+msgstr ""
+
+#: src/admin/views/admin.php:66
+msgctxt "Message instead of log table"
+msgid "No entries found"
+msgstr ""
+
+#: src/admin/views/admin.php:70
 msgctxt "Heading"
 msgid "Send test request"
 msgstr ""
 
-#: src/admin/views/admin.php:50
+#: src/admin/views/admin.php:71
 msgid ""
 "Send a test request if you want to make sure that your WordPress "
 "installation is ready for IFTTT. Use the form below to send a request which "
 "is identical to the ones sent by IFTTT."
 msgstr ""
 
-#: src/admin/views/admin.php:57
+#: src/admin/views/admin.php:78
 msgctxt "Test request form label"
 msgid "Username"
 msgstr ""
 
-#: src/admin/views/admin.php:61
+#: src/admin/views/admin.php:82
 msgctxt "Test request form label"
 msgid "Password"
 msgstr ""
 
-#: src/admin/views/admin.php:65
+#: src/admin/views/admin.php:86
 msgctxt "Test request form label"
 msgid "Title"
 msgstr ""
 
-#: src/admin/views/admin.php:69
+#: src/admin/views/admin.php:90
 msgctxt "Test request form label"
 msgid "Body"
 msgstr ""
 
-#: src/admin/views/admin.php:73
+#: src/admin/views/admin.php:94
 msgctxt "Test request form label"
 msgid "Tags"
 msgstr ""
 
-#: src/admin/views/admin.php:75
+#: src/admin/views/admin.php:96
 msgctxt "Test request form description"
 msgid ""
 "Comma-separated list. The tag 'ifttt_wordpress_bridge' will be used "
 "automatically."
 msgstr ""
 
-#: src/admin/views/admin.php:79
+#: src/admin/views/admin.php:100
 msgctxt "Test request form label"
 msgid "Draft"
 msgstr ""
 
-#: src/admin/views/admin.php:84
+#: src/admin/views/admin.php:105
 msgctxt "Button label"
 msgid "Send request"
 msgstr ""

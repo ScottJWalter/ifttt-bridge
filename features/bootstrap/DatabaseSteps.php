@@ -92,7 +92,7 @@ trait DatabaseSteps {
 	 * @Given /the log contains "([^"]*)"$/
 	 * @Given /the log contains$/
 	 */
-	public function assert_log( $expected_log_entry ) {
+	public function assert_log( $expected_log_entry_msg ) {
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'ifttt_wordpress_bridge_log' ) );
@@ -100,11 +100,11 @@ trait DatabaseSteps {
 		assertEquals( count( $result ), 1, "Option 'ifttt_wordpress_bridge_log' doesn't exists" );
 		$log_entries = unserialize( $result[0]['option_value'] );
 		for ( $i = 0, $count_log_entries = count( $log_entries ); $i < $count_log_entries; $i++ ) {
-			if ( $expected_log_entry == $log_entries[$i] ) {
+			if ( $expected_log_entry_msg == $log_entries[$i]['message'] ) {
 				return;
 			}
 		}
-		PHPUnit_Framework_Assert::fail( "Log entry '$expected_log_entry' not found in log " . json_encode( $log_entries ) );
+		PHPUnit_Framework_Assert::fail( "Log entry '" . $expected_log_entry['message'] . "' not found in log " . json_encode( $log_entries ) );
 	}
 
 	private function create_pdo() {

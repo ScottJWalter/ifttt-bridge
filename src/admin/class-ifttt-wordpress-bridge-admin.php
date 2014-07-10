@@ -104,9 +104,26 @@ class Ifttt_Wordpress_Bridge_Admin {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
-		$options = get_option( 'ifttt_wordpress_bridge_options' );
-		$this->log_enabled = $options && array_key_exists( 'log_enabled', $options ) && $options['log_enabled'] == true;
-		$this->log = get_option( 'ifttt_wordpress_bridge_log', array() );
+		$options           = get_option( 'ifttt_wordpress_bridge_options' );
+		$log               = get_option( 'ifttt_wordpress_bridge_log', array() );
+		$this->log_level   = $options && array_key_exists( 'log_level', $options ) ? $options['log_level'] : 'off';
+		$this->log_entries = array();
+		foreach ( $log as $log_entry ) {
+			$message = '';
+			$message_lines = explode( "\n", $log_entry['message'] );
+			foreach ( $message_lines as $message_line ) {
+				if ( 0 === strpos( $message_line, '  ' ) ) {
+					$message .= "&nbsp;&nbsp;&nbsp;&nbsp;$message_line<br />\n";
+				} else {
+					$message .= "$message_line<br />\n";
+				}
+			}
+			$this->log_entries[] = array(
+				'time' => date_i18n( _x( 'Y/m/d h:i:s A', 'Date time pattern', $this->plugin_slug ) ),
+				'level' => $log_entry['level'],
+				'message' => $message,
+			);
+		}
 		$this->send_test_request_url = get_site_url() . '/wp-content/plugins/ifttt-wordpress-bridge/send_test_request.php';
 		include_once( 'views/admin.php' );
 	}
@@ -138,12 +155,12 @@ class Ifttt_Wordpress_Bridge_Admin {
 	public function send_test_request() {
 		$url = get_site_url() . '/xmlrpc.php';
 		$variables = array(
-			'username' => stripslashes($_POST['test-request-username']),
-			'password' => stripslashes($_POST['test-request-password']),
-			'title' => stripslashes($_POST['test-request-title']),
-			'description' => stripslashes($_POST['test-request-body']),
+			'username' => stripslashes( $_POST['test-request-username'] ),
+			'password' => stripslashes( $_POST['test-request-password'] ),
+			'title' => stripslashes( $_POST['test-request-title'] ),
+			'description' => stripslashes( $_POST['test-request-body'] ),
 			'post_status' => @$_POST['test-request-draft'] == 1 ? 'draft' : 'publish',
-			'tags' => stripslashes($_POST['test-request-tags']),
+			'tags' => stripslashes( $_POST['test-request-tags'] ),
 		);
 		$template = file_get_contents( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'test_request_template.xml' );
 		$options = array( 'body' => $this->create_xml( $template, $variables ) );

@@ -36,9 +36,23 @@ class FeatureContext extends MinkContext {
 	/**
 	 * @BeforeScenario
 	 */
-	public function set_implicit_timeout( $event ) {
-		if ( array_key_exists( 'selenium_implicit_timeout', $this->parameters ) ) {
-			$this->getSession()->getDriver()->setTimeouts( array( 'implicit' => $this->parameters['selenium_implicit_timeout'] ) );
+	public function before_scenario( $event )
+	{
+		$scenario = $this->get_scenario( $event );
+		foreach ( $scenario->getTags() as $tag ) {
+			if ( preg_match( '/^implicitSeleniumTimeout--(\d*)$/', $tag, $matches ) ) {
+				$implicitSeleniumTimeout = intval( $matches[1] * 1000 );
+				$this->getSession()->getDriver()->setTimeouts( array( 'implicit' => $implicitSeleniumTimeout ) );
+			}
+		}
+	}
+
+	private function get_scenario( $event )
+	{
+		if ( is_a( $event, 'Behat\Behat\Event\OutlineExampleEvent' ) ) {
+			return $event->getOutline();
+		} else {
+			return $event->getScenario();
 		}
 	}
 

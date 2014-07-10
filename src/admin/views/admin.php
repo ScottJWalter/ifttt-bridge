@@ -16,71 +16,93 @@
 <div class="wrap">
 	<?php screen_icon(); ?>
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-	<h3><?php _ex( 'Configuration', 'Heading', $this->plugin_slug ) ?></h3>
-	<form method="post" action="options.php">
-<?php
-	settings_fields( 'ifttt_wordpress_bridge_options_group' );
-	do_settings_sections( 'ifttt_wordpress_bridge_options_group' );
-?>
-		<table class="form-table">
+	<div>
+		<h3><?php _ex( 'Logging', 'Heading', $this->plugin_slug ) ?></h3>
+		<p class="description"><?php _e( 'Logging is recommended when you setup a new process based on the IFTTT WordPress Bridge. In the field below you can see helpful information about how the IFTTT request is processed.', $this->plugin_slug ); ?></p>
+		<form method="post" action="options.php">
+		<?php
+			settings_fields( 'ifttt_wordpress_bridge_options_group' );
+			do_settings_sections( 'ifttt_wordpress_bridge_options_group' );
+		?>
+			<table class="form-table">
+				<tbody>
+					<tr>
+						<th scope="row"><label for="ifttt_wordpress_bridge_options_log_level"><?php _ex( 'Log level', 'Form label', $this->plugin_slug ); ?></label></th>
+						<td>
+							<select name="ifttt_wordpress_bridge_options[log_level]" id="ifttt_wordpress_bridge_options_log_level">
+								<?php foreach ( array( 'off', 'error', 'warn', 'info', 'debug' ) as $level ) { ?>
+									<option value="<?php echo $level; ?>" <?php selected( $this->log_level, $level ); ?>><?php echo $level; ?></option>
+								<?php } ?>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<?php submit_button(); ?>
+		</form>
+	</div>
+	<div style="margin-bottom: 40px;">
+		<h3><?php _ex( 'Log (max. 30 entries)', 'Heading', $this->plugin_slug ) ?></h3>
+		<?php if ( count( $this->log_entries ) > 0 ) : ?>
+		<table class="widefat log-messages">
+			<thead>
+				<tr>
+					<th>Time</th>
+					<th>Level</th>
+					<th>Message</th>
+				</tr>
+			</thead>
 			<tbody>
+				<?php foreach ( $this->log_entries as $log_entry ) { ?>
 				<tr>
-					<th scope="row" colspan="2" class="th-full">
-						<label for="ifttt_wordpress_bridge_options_log_enabled">
-							<input name="ifttt_wordpress_bridge_options[log_enabled]" type="checkbox" id="ifttt_wordpress_bridge_options_log_enabled" value="1"<?php checked( '1', $this->log_enabled ); ?> />
-							<?php _e( 'Enable logging', $this->plugin_slug ); ?>
-						</label>
-						<p class="description"><?php _e( 'This is recommended when you setup a process based on the IFTTT WordPress Bridge the first time. In the field below you can see helpful information about how the IFTTT request is processed.', $this->plugin_slug ); ?></p>
-					</th>
+					<td><?php echo $log_entry['time']; ?></td>
+					<td><?php echo $log_entry['level']; ?></td>
+					<td><?php echo $log_entry['message']; ?></td>
 				</tr>
-				<tr>
-					<th scope="row" colspan="2" class="th-full">
-						<textarea id="ifttt-wordpress-bridge-log" readonly="readonly" style="width: 100%; height: 200px"<?php echo $this->log_enabled ? '' : ' disabled="disabled"'; ?>><?php 
-foreach ( $this->log as $log_entry ) {
-	echo esc_html( $log_entry ), "\n";
-}
-?></textarea>
-					</th>
-				</tr>
+				<?php } ?>
 			</tbody>
 		</table>
-		<?php submit_button(); ?>
-	</form>
-	<h3><?php _ex( 'Send test request', 'Heading', $this->plugin_slug ) ?></h3>
-	<p class="description"><?php _e( 'Send a test request if you want to make sure that your WordPress installation is ready for IFTTT. Use the form below to send a request which is identical to the ones sent by IFTTT.', $this->plugin_slug ) ?></p>
-	<form action="admin-post.php" method="post">
-	  <input type="hidden" name="action" value="sent_post_request">
-	  <input type="hidden" name="redirect_url" value="sent_post_request">
-		<table class="form-table">
-			<tbody>
-				<tr>
-					<th scope="row"><label for="test-request-username"><?php _ex( 'Username', 'Test request form label', $this->plugin_slug ); ?></label></th>
-					<td><input type="text" class="regular-text" id="test-request-username" name="test-request-username"></td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="test-request-password"><?php _ex( 'Password', 'Test request form label', $this->plugin_slug ); ?></label></th>
-					<td><input type="password" class="regular-text" id="test-request-password" name="test-request-password"></td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="test-request-title"><?php _ex( 'Title', 'Test request form label', $this->plugin_slug ); ?></label></th>
-					<td><input type="text" class="regular-text" id="test-request-title" name="test-request-title"></td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="test-request-body"><?php _ex( 'Body', 'Test request form label', $this->plugin_slug ); ?></label></th>
-					<td><input type="text" class="regular-text" id="test-request-body" name="test-request-body"></td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="test-request-tags"><?php _ex( 'Tags', 'Test request form label', $this->plugin_slug ); ?></label></th>
-					<td><input type="text" class="regular-text" id="test-request-tags" name="test-request-tags">
-					<p class="description"><?php _ex( "Comma-separated list. The tag 'ifttt_wordpress_bridge' will be used automatically.", 'Test request form description', $this->plugin_slug ); ?></p>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="test-request-draft"><?php _ex( 'Draft', 'Test request form label', $this->plugin_slug ); ?></label></th>
-					<td><input name="test-request-draft" type="checkbox" id="test-request-draft" value="1" /></td>
-				</tr>
-			</tbody>
-		</table>
-		<?php submit_button( _x( 'Send request', 'Button label', $this->plugin_slug ), 'primary', 'send-test-request' ); ?>
-	</form>
+		<?php else : ?>
+		<p class="description no-log-messages"><?php _ex( 'No entries found', 'Message instead of log table', $this->plugin_slug ); ?></p>
+		<?php endif ?>
+	</div>
+	<div>
+		<h3><?php _ex( 'Send test request', 'Heading', $this->plugin_slug ) ?></h3>
+		<p class="description"><?php _e( 'Send a test request if you want to make sure that your WordPress installation is ready for IFTTT. Use the form below to send a request which is identical to the ones sent by IFTTT.', $this->plugin_slug ) ?></p>
+		<form action="admin-post.php" method="post">
+		  <input type="hidden" name="action" value="sent_post_request">
+		  <input type="hidden" name="redirect_url" value="sent_post_request">
+			<table class="form-table">
+				<tbody>
+					<tr>
+						<th scope="row"><label for="test-request-username"><?php _ex( 'Username', 'Test request form label', $this->plugin_slug ); ?></label></th>
+						<td><input type="text" class="regular-text" id="test-request-username" name="test-request-username"></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="test-request-password"><?php _ex( 'Password', 'Test request form label', $this->plugin_slug ); ?></label></th>
+						<td><input type="password" class="regular-text" id="test-request-password" name="test-request-password"></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="test-request-title"><?php _ex( 'Title', 'Test request form label', $this->plugin_slug ); ?></label></th>
+						<td><input type="text" class="regular-text" id="test-request-title" name="test-request-title"></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="test-request-body"><?php _ex( 'Body', 'Test request form label', $this->plugin_slug ); ?></label></th>
+						<td><textarea style="width: 25em; height: 5em;" id="test-request-body" name="test-request-body"></textarea></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="test-request-tags"><?php _ex( 'Tags', 'Test request form label', $this->plugin_slug ); ?></label></th>
+						<td><input type="text" class="regular-text" id="test-request-tags" name="test-request-tags">
+						<p class="description"><?php _ex( "Comma-separated list. The tag 'ifttt_wordpress_bridge' will be used automatically.", 'Test request form description', $this->plugin_slug ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="test-request-draft"><?php _ex( 'Draft', 'Test request form label', $this->plugin_slug ); ?></label></th>
+						<td><input name="test-request-draft" type="checkbox" id="test-request-draft" value="1" /></td>
+					</tr>
+				</tbody>
+			</table>
+			<?php submit_button( _x( 'Send request', 'Button label', $this->plugin_slug ), 'primary', 'send-test-request' ); ?>
+		</form>
+	</div>
 </div>
