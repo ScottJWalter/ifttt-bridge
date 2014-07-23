@@ -41,8 +41,10 @@ trait ManualWordPressSteps {
 	public function uninstall_plugin_manually( $plugin_id ) {
 		$plugin_area = $this->get_page()->find( 'css', "#$plugin_id" );
 		$plugin_area->find( 'xpath', "//a[contains(@href, 'action=delete-selected')]" )->click();
-		$form = $this->get_page()->find( 'xpath', "//form[contains(@action, 'action=delete-selected')]" );
-		$form->find( 'css', '#submit' )->press();
+		$form   = $this->get_page()->find( 'xpath', "//form[contains(@action, 'action=delete-selected')]" );
+		$submit = $form->find( 'css', '#submit' );
+		assertNotNull( $submit );
+		$submit->press();
 	}
 
 	/**

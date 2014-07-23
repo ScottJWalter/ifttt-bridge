@@ -53,6 +53,15 @@ trait DatabaseSteps {
 	}
 
 	/**
+	 * @Given /the option "([^"]*)" should have the serialized value (.*)$/
+	 */
+	public function assert_serialized_option_value( $option_name, $option_value ) {
+		$option_value_obj = json_decode( $option_value, true );
+		$serialized = serialize( $option_value_obj );
+		$this->assert_option_value( $option_name, $serialized );
+	}
+
+	/**
 	 * @Given /the option "([^"]*)" should have the value "([^"]*)"$/
 	 */
 	public function assert_option_value( $option_name, $option_value ) {
@@ -104,7 +113,7 @@ trait DatabaseSteps {
 				return;
 			}
 		}
-		PHPUnit_Framework_Assert::fail( "Log entry '" . $expected_log_entry['message'] . "' not found in log " . json_encode( $log_entries ) );
+		PHPUnit_Framework_Assert::fail( "Log entry '" . $expected_log_entry_msg . "' not found in log " . json_encode( $log_entries ) );
 	}
 
 	private function create_pdo() {

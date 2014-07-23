@@ -23,19 +23,34 @@
           <member>
             <name>title</name>
             <value>
-              <string>It's IFTTT, dude!</string>
+              <string>IFTTT test</string>
             </value>
           </member>
           <member>
             <name>description</name>
             <value>
-              <string>Replace me!</string>
+              <string>It's IFTTT, dude!</string>
             </value>
           </member>
           <member>
             <name>post_status</name>
             <value>
-              <string>Replace me!</string>
+              <string>draft</string>
+            </value>
+          </member>
+          <member>
+            <name>categories</name>
+            <value>
+              <array>
+                <data>
+                  <value>
+                    <string>foo</string>
+                  </value>
+                  <value>
+                    <string>bar</string>
+                  </value>
+                </data>
+              </array>
             </value>
           </member>
           <member>
@@ -43,7 +58,12 @@
             <value>
               <array>
                 <data>
-                  <value>ifttt_wordpress_bridge</value>
+                  <value>
+                    <string>ifttt_wordpress_bridge</string>
+                  </value>
+                  <value>
+                    <string>another_tag</string>
+                  </value>
                 </data>
               </array>
             </value>

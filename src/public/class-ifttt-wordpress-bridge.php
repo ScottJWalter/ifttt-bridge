@@ -140,6 +140,7 @@ class Ifttt_Wordpress_Bridge {
 				$content_struct_log .= '  title: ' . $content_struct['title'] . "\n";
 				$content_struct_log .= '  description: ' . $content_struct['description'] . "\n";
 				$content_struct_log .= '  post_status: ' . $content_struct['post_status'] . "\n";
+				$content_struct_log .= '  categories: ' . implode( ', ', $content_struct['categories'] ) . "\n";
 				$content_struct_log .= '  mt_keywords: ' . implode( ', ', $content_struct['mt_keywords'] );
 				$this->log( 'info', $content_struct_log );
 			}

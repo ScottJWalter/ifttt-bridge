@@ -39,11 +39,25 @@
             </value>
           </member>
           <member>
+            <name>categories</name>
+            <value>
+              <array>
+                <data>
+                  <value>
+                    <string>${category}</string>
+                  </value>
+                </data>
+              </array>
+            </value>
+          </member>
+          <member>
             <name>mt_keywords</name>
             <value>
               <array>
                 <data>
-                  <value>ifttt_wordpress_bridge</value>
+                  <value>
+                    <string>${tag}</string>
+                  </value>
                 </data>
               </array>
             </value>

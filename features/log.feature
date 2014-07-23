@@ -9,10 +9,10 @@ Feature: Log the processing of the IFTTT xmlrcp call
     And the plugin "ifttt-wordpress-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
     When I sent a request via IFTTT
-      | title       | This is a title |
+      | title       | This is a title           |
       | description | And this is a description |
-      | post_status | draft |
-      | tags        | foo, bar |
+      | post_status | draft                     |
+      | tags        | foo, bar                  |
     Then the log contains 3 entries
     Then the log contains "Successfully called 'ifttt_wordpress_bridge' actions"
     Then the log contains "xmlrpc call received"
@@ -22,6 +22,7 @@ Feature: Log the processing of the IFTTT xmlrcp call
         title: This is a title
         description: And this is a description
         post_status: draft
+        categories: 
         mt_keywords: ifttt_wordpress_bridge, foo, bar
       """
 

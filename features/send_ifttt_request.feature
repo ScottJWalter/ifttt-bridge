@@ -20,4 +20,9 @@ Feature: Send request via IFTTT
     And the plugin "ifttt-wordpress-bridge-testplugin" is activated
     And the option "ifttt_wordpress_bridge_testplugin_scenario" has the value "add_option"
     When I sent a request via IFTTT
-    Then the option "ifttt_wordpress_bridge_testplugin_option" should have the value "It's IFTTT, dude!"
+      | title       | IFTTT test        |
+      | description | It's IFTTT, dude! |
+      | post_status | draft             |
+      | categories  | foo, bar          |
+      | tags        | another_tag       |
+    Then the option "ifttt_wordpress_bridge_testplugin_option" should have the serialized value {"title":"IFTTT test","description":"It's IFTTT, dude!","post_status":"draft","categories":["foo","bar"],"mt_keywords":["ifttt_wordpress_bridge","another_tag"]}

@@ -91,6 +91,12 @@
 						<td><textarea style="width: 25em; height: 5em;" id="test-request-body" name="test-request-body"></textarea></td>
 					</tr>
 					<tr>
+						<th scope="row"><label for="test-request-categories"><?php _ex( 'Categories', 'Test request form label', $this->plugin_slug ); ?></label></th>
+						<td><input type="text" class="regular-text" id="test-request-categories" name="test-request-categories">
+						<p class="description"><?php _ex( 'Comma-separated list', 'Test request form description', $this->plugin_slug ); ?></p>
+						</td>
+					</tr>
+					<tr>
 						<th scope="row"><label for="test-request-tags"><?php _ex( 'Tags', 'Test request form label', $this->plugin_slug ); ?></label></th>
 						<td><input type="text" class="regular-text" id="test-request-tags" name="test-request-tags">
 						<p class="description"><?php _ex( "Comma-separated list. The tag 'ifttt_wordpress_bridge' will be used automatically.", 'Test request form description', $this->plugin_slug ); ?></p>
