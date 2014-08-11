@@ -49,7 +49,7 @@ IFTTT or “If This Then That” is a service that enables users to connect diff
 1. Register at www.ifttt.com
 1. Install the IFTTT Instagram Gallery or any other IFTTT plugin that fits your purpose. If you are a developer, you might even want to develop a plugin yourself.
 
-If you need help, don’t hesitate to contact me at xyz!
+If you need help, don’t hesitate to contact me!
 
 If you like this plugin, please rate it.
 

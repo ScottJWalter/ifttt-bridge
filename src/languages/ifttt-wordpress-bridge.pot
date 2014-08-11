@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ifttt-wordpress-bridge 0.9.0\n"
+"Project-Id-Version: ifttt-wordpress-bridge 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-23 11:20+0700\n"
+"POT-Creation-Date: 2014-08-11 13:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,17 +22,17 @@ msgstr ""
 msgid "IFTTT WordPress Bridge"
 msgstr ""
 
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:113
+#: src/admin/class-ifttt-wordpress-bridge-admin.php:112
 msgctxt "Date time pattern"
 msgid "Y/m/d h:i:s A"
 msgstr ""
 
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:160
+#: src/admin/class-ifttt-wordpress-bridge-admin.php:174
 msgctxt "Success message"
 msgid "Test request sent"
 msgstr ""
 
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:175
+#: src/admin/class-ifttt-wordpress-bridge-admin.php:189
 msgid "Settings"
 msgstr ""
 
@@ -129,5 +129,5 @@ msgstr ""
 
 
 #: Project description
-msgid "When using IFTTT with WordPress you can just post new posts. This plugin helps you to do whatever you like. Configure your IFTTT job in a predefined way in you get any information you like in a WordPress action."
+msgid "IFTTT WordPress Bridge is a plugin that allows you to display IFTTT-processed data on your WordPress site in any way you like."
 msgstr ""

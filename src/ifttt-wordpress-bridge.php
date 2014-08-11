@@ -9,8 +9,8 @@
  * @wordpress-plugin
  * Plugin Name:       IFTTT WordPress Bridge
  * Plugin URI:        http://www.bjoerne.com
- * Description:       When using IFTTT with WordPress you can just post new posts. This plugin helps you to do whatever you like. Configure your IFTTT job in a predefined way in you get any information you like in a WordPress action.
- * Version:           0.9.0
+ * Description:       IFTTT WordPress Bridge is a plugin that allows you to display IFTTT-processed data on your WordPress site in any way you like.
+ * Version:           1.0.0
  * Author:            Björn Weinbrenner
  * Author URI:        http://www.bjoerne.com/
  * Text Domain:       ifttt-wordpress-bridge

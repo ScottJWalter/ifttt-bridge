@@ -28,7 +28,7 @@ class Ifttt_Wordpress_Bridge {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.9.0';
+	const VERSION = '1.0.0';
 
 	/**
 	 * Log levels.
