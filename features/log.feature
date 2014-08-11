@@ -120,3 +120,21 @@ Feature: Log the processing of the IFTTT xmlrcp call
     And I press "submit"
     Then I should see the message "Settings saved"
     And I should see an ".no-log-messages" element
+
+  Scenario: Increase log level
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-wordpress-bridge" is installed (from src)
+    And the plugin "ifttt-wordpress-bridge" is activated
+    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "debug" }
+    When I sent a request via IFTTT
+      | title       | This is a title           |
+      | description | And this is a description |
+      | post_status | draft                     |
+      | tags        | foo, bar                  |
+    Then the log contains 4 entries
+    And I am logged as an administrator
+    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    And I select "info" from "ifttt_wordpress_bridge_options_log_level"
+    And I press "submit"
+    Then I should see the message "Settings saved"
+    And the log contains 3 entries

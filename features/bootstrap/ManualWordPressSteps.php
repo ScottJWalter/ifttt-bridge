@@ -33,6 +33,7 @@ trait ManualWordPressSteps {
 		$page = $this->get_page();
 		$plugin_area = $page->find( 'css', "#$plugin_id" );
 		$plugin_area->find( 'xpath', "//a[contains(@href, 'action=deactivate')]" )->click();
+		assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
 	}
 
 	/**
@@ -45,6 +46,7 @@ trait ManualWordPressSteps {
 		$submit = $form->find( 'css', '#submit' );
 		assertNotNull( $submit );
 		$submit->press();
+		assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
 	}
 
 	/**

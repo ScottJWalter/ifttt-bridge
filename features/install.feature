@@ -1,3 +1,4 @@
+@implicitSeleniumTimeout--10
 Feature: Install and activate plugin
   In order to use the plugin
   As an administrator

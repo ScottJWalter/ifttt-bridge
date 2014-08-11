@@ -95,7 +95,6 @@ class Ifttt_Wordpress_Bridge_Admin {
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
 		);
-
 	}
 
 	/**
@@ -134,8 +133,23 @@ class Ifttt_Wordpress_Bridge_Admin {
 	 * @since    1.0.0
 	 */
 	public function validate_options( $options ) {
-		if ( $options['log_enabled'] == false ) {
-			delete_option( 'ifttt_wordpress_bridge_log' );
+		$log_entries = get_option( 'ifttt_wordpress_bridge_log' );
+		if ( $log_entries ) {
+			$option_log_level = $options['log_level'];
+			$new_log_entries  = array();
+			foreach ( $log_entries as $log_entry ) {
+				$entry_log_level = $log_entry['level'];
+				foreach ( Ifttt_Wordpress_Bridge::$log_levels as $available_level ) {
+					if ( $available_level == $option_log_level ) {
+						$new_log_entries[] = $log_entry;
+						continue;
+					}
+					if ( $available_level == $entry_log_level ) {
+						break;
+					}
+				}
+			}
+			update_option( 'ifttt_wordpress_bridge_log', $new_log_entries );
 		}
 		return $options;
 	}

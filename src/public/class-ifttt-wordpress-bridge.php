@@ -135,7 +135,7 @@ class Ifttt_Wordpress_Bridge {
 				return;
 			}
 			$ifttt_wordpress_bridge_request = true;
-			if ( $this->log_enabled( 'info' ) ) {
+			if ( $this->log_level_enabled( 'info' ) ) {
 				$content_struct_log  = "Received data:\n";
 				$content_struct_log .= '  title: ' . $content_struct['title'] . "\n";
 				$content_struct_log .= '  description: ' . $content_struct['description'] . "\n";
@@ -170,7 +170,7 @@ class Ifttt_Wordpress_Bridge {
 		} else {
 			$data =& $HTTP_RAW_POST_DATA;
 		}
-		if ( $this->log_enabled( 'debug' ) ) {
+		if ( $this->log_level_enabled( 'debug' ) ) {
 			$this->log( 'debug', "Received request:\n" . htmlspecialchars( $data ) );
 		}
 		$message = new IXR_Message( $data );
@@ -211,7 +211,7 @@ class Ifttt_Wordpress_Bridge {
 	 *
 	 * @since   1.0.0
 	 */
-	private function log_enabled( $level ) {
+	private function log_level_enabled( $level ) {
 		foreach ( self::$log_levels as $i => $available_level ) {
 			if ( $level == $available_level ) {
 				return $i >= $this->log_level_index;
@@ -226,7 +226,7 @@ class Ifttt_Wordpress_Bridge {
 	 * @since   1.0.0
 	 */
 	private function log( $level, $message ) {
-		if ( ! $this->log_enabled( $level ) ) {
+		if ( ! $this->log_level_enabled( $level ) ) {
 			return;
 		}
 		$log_entry = array(
@@ -234,16 +234,16 @@ class Ifttt_Wordpress_Bridge {
 			'level'   => $level,
 			'message' => $message,
 		);
-		$log_array = get_option( 'ifttt_wordpress_bridge_log' );
-		if ( $log_array ) {
-			if ( count( $log_array ) == 30 ) {
-				array_shift( $log_array );
+		$log_entries = get_option( 'ifttt_wordpress_bridge_log' );
+		if ( $log_entries ) {
+			if ( count( $log_entries ) == 30 ) {
+				array_shift( $log_entries );
 			}
-			array_push( $log_array, $log_entry );
-			update_option( 'ifttt_wordpress_bridge_log', $log_array );
+			array_push( $log_entries, $log_entry );
+			update_option( 'ifttt_wordpress_bridge_log', $log_entries );
 		} else {
-			$log_array = array( $log_entry );
-			add_option( 'ifttt_wordpress_bridge_log', $log_array );
+			$log_entries = array( $log_entry );
+			add_option( 'ifttt_wordpress_bridge_log', $log_entries );
 		}
 	}
 }
