@@ -1,4 +1,4 @@
-ifttt-wordpress-bridge WordPress project
+ifttt-bridge WordPress project
 ==================================================
 
 Project description
@@ -25,7 +25,7 @@ IFTTT WordPress Bridge will only prepare and process your IFTTT data, ensuring t
 
 *For developers*
 
-IFTTT WordPress Bridge will process the data received and call the WordPress activity "ifttt-wordpress-bridge". Any plugins that have registered for this activity will be notified and will receive the data.
+IFTTT WordPress Bridge will process the data received and call the WordPress activity "ifttt-bridge". Any plugins that have registered for this activity will be notified and will receive the data.
 
 If you have developed a plugin or plan to do so, feel free to contact me! I will gladly include your published plugin in this list.
 

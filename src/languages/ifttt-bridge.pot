@@ -3,44 +3,43 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ifttt-wordpress-bridge 0.9.0\n"
+"Project-Id-Version: ifttt-bridge 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-11 13:21+0700\n"
-"PO-Revision-Date: 2014-08-11 13:26+0700\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2014-08-11 13:55+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: de\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.5\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:92
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:93
+#: src/admin/class-ifttt-bridge-admin.php:92
+#: src/admin/class-ifttt-bridge-admin.php:93
 msgid "IFTTT WordPress Bridge"
-msgstr "IFTTT WordPress Bridge"
+msgstr ""
 
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:112
+#: src/admin/class-ifttt-bridge-admin.php:112
 msgctxt "Date time pattern"
 msgid "Y/m/d h:i:s A"
-msgstr "Y/m/d H:i:s"
+msgstr ""
 
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:174
+#: src/admin/class-ifttt-bridge-admin.php:174
 msgctxt "Success message"
 msgid "Test request sent"
-msgstr "Testanfrage wurde gesendet"
+msgstr ""
 
-#: src/admin/class-ifttt-wordpress-bridge-admin.php:189
+#: src/admin/class-ifttt-bridge-admin.php:189
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr ""
 
 #: src/admin/views/admin.php:20
 msgctxt "Heading"
 msgid "Logging"
-msgstr "Logging"
+msgstr ""
 
 #: src/admin/views/admin.php:21
 msgid ""
@@ -48,29 +47,26 @@ msgid ""
 "WordPress Bridge. In the field below you can see helpful information about "
 "how the IFTTT request is processed."
 msgstr ""
-"Empfohlen, wenn du einen neuen Prozess basierend auf der IFTTT WordPress "
-"Bridge einrichtest. Im unterstehenden Feld werden dann nützliche "
-"Informationen darüber ausgegeben, wir die IFTTT-Anfrage verarbeitet wird."
 
 #: src/admin/views/admin.php:30
 msgctxt "Form label"
 msgid "Log level"
-msgstr "Log-Level"
+msgstr ""
 
 #: src/admin/views/admin.php:45
 msgctxt "Heading"
 msgid "Log (max. 30 entries)"
-msgstr "Log (max. 30 Einträge)"
+msgstr ""
 
 #: src/admin/views/admin.php:66
 msgctxt "Message instead of log table"
 msgid "No entries found"
-msgstr "Keine Einträge vorhanden"
+msgstr ""
 
 #: src/admin/views/admin.php:70
 msgctxt "Heading"
 msgid "Send test request"
-msgstr "Sende Testanfrage"
+msgstr ""
 
 #: src/admin/views/admin.php:71
 msgid ""
@@ -78,44 +74,41 @@ msgid ""
 "installation is ready for IFTTT. Use the form below to send a request which "
 "is identical to the ones sent by IFTTT."
 msgstr ""
-"Sende eine Testanfrage, um sicherzustellen, dass deine Blog bereit für IFTTT "
-"ist. Verwende das untenstehende Formular, um eine Anfrage zustellen, die "
-"identisch zu den Anfragen von IFTTT ist."
 
 #: src/admin/views/admin.php:78
 msgctxt "Test request form label"
 msgid "Username"
-msgstr "Benutzername"
+msgstr ""
 
 #: src/admin/views/admin.php:82
 msgctxt "Test request form label"
 msgid "Password"
-msgstr "Passwort"
+msgstr ""
 
 #: src/admin/views/admin.php:86
 msgctxt "Test request form label"
 msgid "Title"
-msgstr "Titel"
+msgstr ""
 
 #: src/admin/views/admin.php:90
 msgctxt "Test request form label"
 msgid "Body"
-msgstr "Inhalt"
+msgstr ""
 
 #: src/admin/views/admin.php:94
 msgctxt "Test request form label"
 msgid "Categories"
-msgstr "Kategorien"
+msgstr ""
 
 #: src/admin/views/admin.php:96
 msgctxt "Test request form description"
 msgid "Comma-separated list"
-msgstr "Komma-separierte Liste"
+msgstr ""
 
 #: src/admin/views/admin.php:100
 msgctxt "Test request form label"
 msgid "Tags"
-msgstr "Tags"
+msgstr ""
 
 #: src/admin/views/admin.php:102
 msgctxt "Test request form description"
@@ -123,35 +116,18 @@ msgid ""
 "Comma-separated list. The tag 'ifttt_wordpress_bridge' will be used "
 "automatically."
 msgstr ""
-"Komma-separierte Liste. Das Tag 'ifttt_wordpress_bridge' wird automatisch "
-"gesetzt."
 
 #: src/admin/views/admin.php:106
 msgctxt "Test request form label"
 msgid "Draft"
-msgstr "Entwurf"
+msgstr ""
 
 #: src/admin/views/admin.php:111
 msgctxt "Button label"
 msgid "Send request"
-msgstr "Sende Anfrage"
+msgstr ""
+
 
 #: Project description
-msgid ""
-"IFTTT WordPress Bridge is a plugin that allows you to display IFTTT-"
-"processed data on your WordPress site in any way you like."
+msgid "IFTTT WordPress Bridge is a plugin that allows you to display IFTTT-processed data on your WordPress site in any way you like."
 msgstr ""
-"IFTTT WordPress Bridge ermöglicht dir, von IFTTT verarbeitete Daten in "
-"beliebiger Art und Weise auf deinem WordPress-Blog zu verarbeiten und "
-"darzustellen."
-
-#~ msgctxt "Heading"
-#~ msgid "Configuration"
-#~ msgstr "Konfiguration"
-
-#~ msgid "Enable logging"
-#~ msgstr "Aktiviere Logging"
-
-#~ msgctxt "Test request form label"
-#~ msgid "Description"
-#~ msgstr "Beschreibung"

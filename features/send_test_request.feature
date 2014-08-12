@@ -5,11 +5,11 @@ Feature: Send test requests
 
   Scenario: Send simple test request
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     And I fill in the following:
       | test-request-username   | admin                     |
       | test-request-password   | admin                     |
@@ -33,11 +33,11 @@ Feature: Send test requests
 
   Scenario: Send quoted test request
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     And I fill in the following:
       | test-request-username   | admin                     |
       | test-request-password   | admin                     |
@@ -62,11 +62,11 @@ Feature: Send test requests
 
   Scenario: Send categories
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     And I fill in the following:
       | test-request-username   | admin                     |
       | test-request-password   | admin                     |

@@ -13,11 +13,11 @@
  * Version:           1.0.0
  * Author:            Björn Weinbrenner
  * Author URI:        http://www.bjoerne.com/
- * Text Domain:       ifttt-wordpress-bridge
+ * Text Domain:       ifttt-bridge
  * License:           GPLv3
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path:       /languages
- * GitHub Plugin URI: https://github.com/bjoerne2/ifttt-wordpress-bridge
+ * GitHub Plugin URI: https://github.com/bjoerne2/ifttt-bridge
  * WordPress-Plugin-Boilerplate: v2.6.1
  */
 
@@ -26,11 +26,11 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-ifttt-wordpress-bridge.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-ifttt-bridge.php' );
 
 add_action( 'plugins_loaded', array( 'Ifttt_Wordpress_Bridge', 'get_instance' ) );
 
 if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-ifttt-wordpress-bridge-admin.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-ifttt-bridge-admin.php' );
 	add_action( 'plugins_loaded', array( 'Ifttt_Wordpress_Bridge_Admin', 'get_instance' ) );
 }

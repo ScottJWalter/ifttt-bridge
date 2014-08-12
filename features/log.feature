@@ -5,8 +5,8 @@ Feature: Log the processing of the IFTTT xmlrcp call
 
   Scenario: Log IFTTT request
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
     When I sent a request via IFTTT
       | title       | This is a title           |
@@ -28,17 +28,17 @@ Feature: Log the processing of the IFTTT xmlrcp call
 
   Scenario: Don't log IFTTT request if log is disabled
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     When I sent a request via IFTTT
     Then the option "ifttt_wordpress_bridge_log" should not exist
 
   Scenario: Log exception
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
-    And the plugin "ifttt-wordpress-bridge-testplugin" is installed (from features/plugins/ifttt-wordpress-bridge-testplugin.php)
-    And the plugin "ifttt-wordpress-bridge-testplugin" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
+    And the plugin "ifttt-bridge-testplugin" is installed (from features/plugins/ifttt-bridge-testplugin.php)
+    And the plugin "ifttt-bridge-testplugin" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "error" }
     And the option "ifttt_wordpress_bridge_testplugin_scenario" has the value "throw_exception"
     When I sent a request via IFTTT
@@ -50,24 +50,24 @@ Feature: Log the processing of the IFTTT xmlrcp call
 
   Scenario: See empty log message
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     Then I should see an ".no-log-messages" element
 
   Scenario: See log
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
     And I sent a request via IFTTT
       | title       | This is a title |
       | description | And this is a description |
       | post_status | draft |
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     Then I should see
       | Successfully called 'ifttt_wordpress_bridge' actions |
       | xmlrpc call received |
@@ -82,27 +82,27 @@ Feature: Log the processing of the IFTTT xmlrcp call
 
   Scenario: Log disabled on admin page
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     Then the "ifttt_wordpress_bridge_options_log_level" field should contain "off"
 
   Scenario: Log enabled on admin page
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     Then the "ifttt_wordpress_bridge_options_log_level" field should contain "info"
 
   Scenario: Enable log
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     And I select "info" from "ifttt_wordpress_bridge_options_log_level"
     And I press "submit"
     Then I should see the message "Settings saved"
@@ -110,12 +110,12 @@ Feature: Log the processing of the IFTTT xmlrcp call
 
   Scenario: Disable log
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
     And I sent a request via IFTTT
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     And I select "off" from "ifttt_wordpress_bridge_options_log_level"
     And I press "submit"
     Then I should see the message "Settings saved"
@@ -123,8 +123,8 @@ Feature: Log the processing of the IFTTT xmlrcp call
 
   Scenario: Increase log level
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "debug" }
     When I sent a request via IFTTT
       | title       | This is a title           |
@@ -133,7 +133,7 @@ Feature: Log the processing of the IFTTT xmlrcp call
       | tags        | foo, bar                  |
     Then the log contains 4 entries
     And I am logged as an administrator
-    When I go to "/wp-admin/options-general.php?page=ifttt-wordpress-bridge.php"
+    When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     And I select "info" from "ifttt_wordpress_bridge_options_log_level"
     And I press "submit"
     Then I should see the message "Settings saved"

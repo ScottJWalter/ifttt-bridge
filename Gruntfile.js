@@ -4,8 +4,8 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     pot: {
       options: {
-        text_domain: 'ifttt-wordpress-bridge',
-        dest: 'build/ifttt-wordpress-bridge.pot',
+        text_domain: 'ifttt-bridge',
+        dest: 'build/ifttt-bridge.pot',
         keywords: ['__', '_e', '_x:1,2c', '_ex:1,2c'],
         encoding: 'UTF-8'
       },
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     },
     replace: {
       plugin_version_const: {
-        src: ['src/public/class-ifttt-wordpress-bridge.php'],
+        src: ['src/public/class-ifttt-bridge.php'],
         overwrite: true,
         replacements: [{
           from: /(const VERSION = ')([^']*)(';)/,
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         }]
       },
       plugin_version_comment: {
-        src: ['src/ifttt-wordpress-bridge.php'],
+        src: ['src/ifttt-bridge.php'],
         overwrite: true,
         replacements: [{
           from: /(\* Version:[ ]*)([^ \n]*)/,
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         }]
       },
       project_description_pot: {
-        src: ['src/ifttt-wordpress-bridge.php'],
+        src: ['src/ifttt-bridge.php'],
         dest: 'build/project_description_pot.txt',             // destination directory or file
         replacements: [{
           from: /[\s\S]*\* Description:       (.*)[\s\S]*/g,
@@ -42,8 +42,8 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['build/ifttt-wordpress-bridge.pot', 'build/project_description_pot.txt'],
-        dest: 'src/languages/ifttt-wordpress-bridge.pot'
+        src: ['build/ifttt-bridge.pot', 'build/project_description_pot.txt'],
+        dest: 'src/languages/ifttt-bridge.pot'
       }
     },
   });

@@ -9,11 +9,11 @@ Feature: Setup fresh WordPress
 
   Scenario: Get WordPress with activated plugin
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
 
   Scenario: Get German WordPress with activated plugin
     Given the blog language is "de_DE"
     And a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated

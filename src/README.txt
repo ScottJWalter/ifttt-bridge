@@ -30,7 +30,7 @@ IFTTT WordPress Bridge will only prepare and process your IFTTT data, ensuring t
 
 *For developers*
 
-IFTTT WordPress Bridge will process the data received and call the WordPress activity "ifttt-wordpress-bridge". Any plugins that have registered for this activity will be notified and will receive the data.
+IFTTT WordPress Bridge will process the data received and call the WordPress activity "ifttt-bridge". Any plugins that have registered for this activity will be notified and will receive the data.
 
 If you have developed a plugin or plan to do so, feel free to contact me! I will gladly include your published plugin in this list.
 
@@ -70,13 +70,13 @@ e.g.
 
 1. Navigate to the 'Add New' in the plugins dashboard
 2. Navigate to the 'Upload' area
-3. Select `ifttt-wordpress-bridge.zip` from your computer
+3. Select `ifttt-bridge.zip` from your computer
 4. Click 'Install Now'
 5. Activate the plugin in the Plugin dashboard
 
 = Using FTP =
 
-1. Download `ifttt-wordpress-bridge.zip`
-2. Extract the `ifttt-wordpress-bridge` directory to your computer
-3. Upload the `ifttt-wordpress-bridge` directory to the `/wp-content/plugins/` directory
+1. Download `ifttt-bridge.zip`
+2. Extract the `ifttt-bridge` directory to your computer
+3. Upload the `ifttt-bridge` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard

@@ -51,7 +51,7 @@ class Ifttt_Wordpress_Bridge {
 	 *
 	 * @var     string
 	 */
-	protected $plugin_slug = 'ifttt-wordpress-bridge';
+	protected $plugin_slug = 'ifttt-bridge';
 
 	/**
 	 * Instance of this class.

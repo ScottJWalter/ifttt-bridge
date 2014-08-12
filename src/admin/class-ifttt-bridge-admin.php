@@ -114,7 +114,7 @@ class Ifttt_Wordpress_Bridge_Admin {
 				'message' => $log_entry['message'],
 			);
 		}
-		$this->send_test_request_url = get_site_url() . '/wp-content/plugins/ifttt-wordpress-bridge/send_test_request.php';
+		$this->send_test_request_url = get_site_url() . '/wp-content/plugins/ifttt-bridge/send_test_request.php';
 		include_once( 'views/admin.php' );
 	}
 

@@ -5,8 +5,8 @@ Feature: Send request via IFTTT
   
   Scenario: Response default xml
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
     When I sent a request via IFTTT
     Then the response code should be 200
     And the response body should contain "<string>-1</string>"
@@ -14,10 +14,10 @@ Feature: Send request via IFTTT
   
   Scenario: Perform action
     Given a fresh WordPress is installed
-    And the plugin "ifttt-wordpress-bridge" is installed (from src)
-    And the plugin "ifttt-wordpress-bridge" is activated
-    And the plugin "ifttt-wordpress-bridge-testplugin" is installed (from features/plugins/ifttt-wordpress-bridge-testplugin.php)
-    And the plugin "ifttt-wordpress-bridge-testplugin" is activated
+    And the plugin "ifttt-bridge" is installed (from src)
+    And the plugin "ifttt-bridge" is activated
+    And the plugin "ifttt-bridge-testplugin" is installed (from features/plugins/ifttt-bridge-testplugin.php)
+    And the plugin "ifttt-bridge-testplugin" is activated
     And the option "ifttt_wordpress_bridge_testplugin_scenario" has the value "add_option"
     When I sent a request via IFTTT
       | title       | IFTTT test        |
