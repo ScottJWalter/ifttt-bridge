@@ -148,12 +148,11 @@ class Ifttt_Wordpress_Bridge {
 			$this->log( 'info', "Successfully called 'ifttt_wordpress_bridge' actions" );
 		} catch (Exception $e) {
 			$this->log( 'error', 'An error occurred: ' . $e->getMessage() );
-		} finally {
-			if ( $ifttt_wordpress_bridge_request ) {
-				header( 'Content-Type: text/xml; charset=UTF-8' );
-				readfile( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'default_response.xml' );
-				die();
-			}
+		}
+		if ( $ifttt_wordpress_bridge_request ) {
+			header( 'Content-Type: text/xml; charset=UTF-8' );
+			readfile( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'default_response.xml' );
+			die();
 		}
 	}
 
