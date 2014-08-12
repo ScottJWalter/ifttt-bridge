@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/admin/class-ifttt-bridge-admin.php:92
 #: src/admin/class-ifttt-bridge-admin.php:93
-msgid "IFTTT WordPress Bridge"
+msgid "IFTTT Bridge for WordPress"
 msgstr ""
 
 #: src/admin/class-ifttt-bridge-admin.php:112
@@ -113,7 +113,7 @@ msgstr ""
 #: src/admin/views/admin.php:102
 msgctxt "Test request form description"
 msgid ""
-"Comma-separated list. The tag 'ifttt_wordpress_bridge' will be used "
+"Comma-separated list. The tag 'ifttt_bridge' will be used "
 "automatically."
 msgstr ""
 
@@ -129,5 +129,5 @@ msgstr ""
 
 
 #: Project description
-msgid "IFTTT WordPress Bridge is a plugin that allows you to display IFTTT-processed data on your WordPress site in any way you like."
+msgid "IFTTT Bridge for WordPress is a plugin that allows you to display IFTTT-processed data on your WordPress site in any way you like."
 msgstr ""

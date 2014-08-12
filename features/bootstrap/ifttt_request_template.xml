@@ -59,7 +59,7 @@
               <array>
                 <data>
                   <value>
-                    <string>ifttt_wordpress_bridge</string>
+                    <string>ifttt_bridge</string>
                   </value>
                   <value>
                     <string>another_tag</string>

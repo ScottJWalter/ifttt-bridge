@@ -1,8 +1,8 @@
 <?php
 /**
- * IFTTT WordPress Bridge
+ * IFTTT Bridge for WordPress
  *
- * @package   Ifttt_Wordpress_Bridge_Admin
+ * @package   Ifttt_Bridge_Admin
  * @author    Björn Weinbrenner <info@bjoerne.com>
  * @license   GPLv3
  * @link      http://bjoerne.com
@@ -16,10 +16,10 @@
  * If you're interested in introducing public-facing
  * functionality, then refer to `class-plugin-name.php`
  *
- * @package Ifttt_Wordpress_Bridge_Admin
+ * @package Ifttt_Bridge_Admin
  * @author  Björn Weinbrenner <info@bjoerne.com>
  */
-class Ifttt_Wordpress_Bridge_Admin {
+class Ifttt_Bridge_Admin {
 
 	/**
 	 * Instance of this class.
@@ -47,7 +47,7 @@ class Ifttt_Wordpress_Bridge_Admin {
 	 */
 	private function __construct() {
 
-		$plugin = Ifttt_Wordpress_Bridge::get_instance();
+		$plugin = Ifttt_Bridge::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Add the options page and menu item.
@@ -89,8 +89,8 @@ class Ifttt_Wordpress_Bridge_Admin {
 		 *
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'IFTTT WordPress Bridge', $this->plugin_slug ),
-			__( 'IFTTT WordPress Bridge', $this->plugin_slug ),
+			__( 'IFTTT Bridge for WordPress', $this->plugin_slug ),
+			__( 'IFTTT Bridge for WordPress', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
@@ -103,8 +103,8 @@ class Ifttt_Wordpress_Bridge_Admin {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
-		$options           = get_option( 'ifttt_wordpress_bridge_options' );
-		$log               = get_option( 'ifttt_wordpress_bridge_log', array() );
+		$options           = get_option( 'ifttt_bridge_options' );
+		$log               = get_option( 'ifttt_bridge_log', array() );
 		$this->log_level   = $options && array_key_exists( 'log_level', $options ) ? $options['log_level'] : 'off';
 		$this->log_entries = array();
 		foreach ( $log as $log_entry ) {
@@ -124,7 +124,7 @@ class Ifttt_Wordpress_Bridge_Admin {
 	 * @since    1.0.0
 	 */
 	public function register_options_setting() {
-		register_setting( 'ifttt_wordpress_bridge_options_group', 'ifttt_wordpress_bridge_options', array( $this, 'validate_options' ) );
+		register_setting( 'ifttt_bridge_options_group', 'ifttt_bridge_options', array( $this, 'validate_options' ) );
 	}
 
 	/**
@@ -133,13 +133,13 @@ class Ifttt_Wordpress_Bridge_Admin {
 	 * @since    1.0.0
 	 */
 	public function validate_options( $options ) {
-		$log_entries = get_option( 'ifttt_wordpress_bridge_log' );
+		$log_entries = get_option( 'ifttt_bridge_log' );
 		if ( $log_entries ) {
 			$option_log_level = $options['log_level'];
 			$new_log_entries  = array();
 			foreach ( $log_entries as $log_entry ) {
 				$entry_log_level = $log_entry['level'];
-				foreach ( Ifttt_Wordpress_Bridge::$log_levels as $available_level ) {
+				foreach ( Ifttt_Bridge::$log_levels as $available_level ) {
 					if ( $available_level == $option_log_level ) {
 						$new_log_entries[] = $log_entry;
 						continue;
@@ -149,7 +149,7 @@ class Ifttt_Wordpress_Bridge_Admin {
 					}
 				}
 			}
-			update_option( 'ifttt_wordpress_bridge_log', $new_log_entries );
+			update_option( 'ifttt_bridge_log', $new_log_entries );
 		}
 		return $options;
 	}
@@ -221,9 +221,9 @@ class Ifttt_Wordpress_Bridge_Admin {
 		}
 		$tags = array_map( 'trim', explode( ',', $variables['tags'] ) );
 		if ( ! empty( $tags ) && $tags[0] != '' ) {
-			array_unshift( $tags, 'ifttt_wordpress_bridge' );
+			array_unshift( $tags, 'ifttt_bridge' );
 		} else {
-			$tags = array( 'ifttt_wordpress_bridge' );
+			$tags = array( 'ifttt_bridge' );
 		}
 		$mt_keywords_data = $xpath->query( '/methodCall/params/param[4]/value/struct/member[name="mt_keywords"]/value/array/data' )->item( 0 );
 		$tag_value = $xpath->query( '/methodCall/params/param[4]/value/struct/member[name="mt_keywords"]/value/array/data/value' )->item( 0 );

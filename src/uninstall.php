@@ -2,7 +2,7 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @package   Ifttt_Wordpress_Bridge
+ * @package   Ifttt_Bridge
  * @author    Björn Weinbrenner <info@bjoerne.com>
  * @license   GPLv3
  * @link      http://bjoerne.com
@@ -22,12 +22,12 @@ if ( is_multisite() ) {
 	if ( $blogs ) {
 		foreach ( $blogs as $blog ) {
 			switch_to_blog( $blog['blog_id'] );
-			delete_option( 'ifttt_wordpress_bridge_options' );
-			delete_option( 'ifttt_wordpress_bridge_log' );
+			delete_option( 'ifttt_bridge_options' );
+			delete_option( 'ifttt_bridge_log' );
 			restore_current_blog();
 		}
 	}
 } else {
-	delete_option( 'ifttt_wordpress_bridge_options' );
-	delete_option( 'ifttt_wordpress_bridge_log' );
+	delete_option( 'ifttt_bridge_options' );
+	delete_option( 'ifttt_bridge_log' );
 }

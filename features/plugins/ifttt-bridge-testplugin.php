@@ -1,20 +1,20 @@
 <?php
 /**
- * @package Ifttt_Wordpress_Bridge_Testplugin
+ * @package Ifttt_Bridge_Testplugin
  * @version 0.0.0
  */
 /*
-Plugin Name: IFTTT WordPress Bridge Testplugin
+Plugin Name: IFTTT Bridge for WordPress Testplugin
 Version: 0.0.0
 */
 
-function ifttt_wordpress_bridge_testplugin_action( $content_struct ) {
-	$scenario = get_option( 'ifttt_wordpress_bridge_testplugin_scenario' );
+function ifttt_bridge_testplugin_action( $content_struct ) {
+	$scenario = get_option( 'ifttt_bridge_testplugin_scenario' );
 	if ( 'throw_exception' == $scenario ) {
-		throw new Exception( 'Error processing ifttt_wordpress_bridge action' );
+		throw new Exception( 'Error processing ifttt_bridge action' );
 	} elseif ( 'add_option' == $scenario ) {
-		add_option( 'ifttt_wordpress_bridge_testplugin_option' , $content_struct );
+		add_option( 'ifttt_bridge_testplugin_option' , $content_struct );
 	}
 }
 
-add_action( 'ifttt_wordpress_bridge', 'ifttt_wordpress_bridge_testplugin_action' );
+add_action( 'ifttt_bridge', 'ifttt_bridge_testplugin_action' );

@@ -7,7 +7,7 @@ Feature: Send test requests
     Given a fresh WordPress is installed
     And the plugin "ifttt-bridge" is installed (from src)
     And the plugin "ifttt-bridge" is activated
-    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
+    And the option "ifttt_bridge_options" has the serialized value { "log_level": "info" }
     And I am logged as an administrator
     When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     And I fill in the following:
@@ -19,7 +19,7 @@ Feature: Send test requests
     And I check "test-request-draft"
     And I press "send-test-request"
     Then I should see "Test request sent"
-    And the log contains "Successfully called 'ifttt_wordpress_bridge' actions"
+    And the log contains "Successfully called 'ifttt_bridge' actions"
     And the log contains
       """
       Received data:
@@ -27,7 +27,7 @@ Feature: Send test requests
         description: And this is a description
         post_status: draft
         categories: 
-        mt_keywords: ifttt_wordpress_bridge, foo, bar
+        mt_keywords: ifttt_bridge, foo, bar
       """
     And the log contains "xmlrpc call received"
 
@@ -35,7 +35,7 @@ Feature: Send test requests
     Given a fresh WordPress is installed
     And the plugin "ifttt-bridge" is installed (from src)
     And the plugin "ifttt-bridge" is activated
-    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
+    And the option "ifttt_bridge_options" has the serialized value { "log_level": "info" }
     And I am logged as an administrator
     When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     And I fill in the following:
@@ -47,7 +47,7 @@ Feature: Send test requests
     And I check "test-request-draft"
     And I press "send-test-request"
     Then I should see "Test request sent"
-    And the log contains "Successfully called 'ifttt_wordpress_bridge' actions"
+    And the log contains "Successfully called 'ifttt_bridge' actions"
     And the log contains
       """
       Received data:
@@ -55,7 +55,7 @@ Feature: Send test requests
         description: And this is a description
         post_status: draft
         categories: 
-        mt_keywords: ifttt_wordpress_bridge, foo, bar
+        mt_keywords: ifttt_bridge, foo, bar
       """
     And the log contains "xmlrpc call received"
 
@@ -64,7 +64,7 @@ Feature: Send test requests
     Given a fresh WordPress is installed
     And the plugin "ifttt-bridge" is installed (from src)
     And the plugin "ifttt-bridge" is activated
-    And the option "ifttt_wordpress_bridge_options" has the serialized value { "log_level": "info" }
+    And the option "ifttt_bridge_options" has the serialized value { "log_level": "info" }
     And I am logged as an administrator
     When I go to "/wp-admin/options-general.php?page=ifttt-bridge.php"
     And I fill in the following:
@@ -76,7 +76,7 @@ Feature: Send test requests
     And I check "test-request-draft"
     And I press "send-test-request"
     Then I should see "Test request sent"
-    And the log contains "Successfully called 'ifttt_wordpress_bridge' actions"
+    And the log contains "Successfully called 'ifttt_bridge' actions"
     And the log contains
       """
       Received data:
@@ -84,6 +84,6 @@ Feature: Send test requests
         description: And this is a description
         post_status: draft
         categories: foo, bar
-        mt_keywords: ifttt_wordpress_bridge
+        mt_keywords: ifttt_bridge
       """
     And the log contains "xmlrpc call received"

@@ -5,7 +5,7 @@
  * This includes the header, options, and other information that should provide
  * The User Interface to the end user.
  *
- * @package   Ifttt_Wordpress_Bridge_Admin
+ * @package   Ifttt_Bridge_Admin
  * @author    Björn Weinbrenner <info@bjoerne.com>
  * @license   GPLv3
  * @link      http://bjoerne.com
@@ -18,18 +18,18 @@
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 	<div>
 		<h3><?php _ex( 'Logging', 'Heading', $this->plugin_slug ) ?></h3>
-		<p class="description"><?php _e( 'Logging is recommended when you setup a new process based on the IFTTT WordPress Bridge. In the field below you can see helpful information about how the IFTTT request is processed.', $this->plugin_slug ); ?></p>
+		<p class="description"><?php _e( 'Logging is recommended when you setup a new process based on the IFTTT Bridge for WordPress. In the field below you can see helpful information about how the IFTTT request is processed.', $this->plugin_slug ); ?></p>
 		<form method="post" action="options.php">
 		<?php
-			settings_fields( 'ifttt_wordpress_bridge_options_group' );
-			do_settings_sections( 'ifttt_wordpress_bridge_options_group' );
+			settings_fields( 'ifttt_bridge_options_group' );
+			do_settings_sections( 'ifttt_bridge_options_group' );
 		?>
 			<table class="form-table">
 				<tbody>
 					<tr>
-						<th scope="row"><label for="ifttt_wordpress_bridge_options_log_level"><?php _ex( 'Log level', 'Form label', $this->plugin_slug ); ?></label></th>
+						<th scope="row"><label for="ifttt_bridge_options_log_level"><?php _ex( 'Log level', 'Form label', $this->plugin_slug ); ?></label></th>
 						<td>
-							<select name="ifttt_wordpress_bridge_options[log_level]" id="ifttt_wordpress_bridge_options_log_level">
+							<select name="ifttt_bridge_options[log_level]" id="ifttt_bridge_options_log_level">
 								<?php foreach ( array( 'off', 'error', 'warn', 'info', 'debug' ) as $level ) { ?>
 									<option value="<?php echo $level; ?>" <?php selected( $this->log_level, $level ); ?>><?php echo $level; ?></option>
 								<?php } ?>
@@ -99,7 +99,7 @@
 					<tr>
 						<th scope="row"><label for="test-request-tags"><?php _ex( 'Tags', 'Test request form label', $this->plugin_slug ); ?></label></th>
 						<td><input type="text" class="regular-text" id="test-request-tags" name="test-request-tags">
-						<p class="description"><?php _ex( "Comma-separated list. The tag 'ifttt_wordpress_bridge' will be used automatically.", 'Test request form description', $this->plugin_slug ); ?></p>
+						<p class="description"><?php _ex( "Comma-separated list. The tag 'ifttt_bridge' will be used automatically.", 'Test request form description', $this->plugin_slug ); ?></p>
 						</td>
 					</tr>
 					<tr>

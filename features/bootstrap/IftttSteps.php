@@ -77,9 +77,9 @@ trait IftttSteps {
 		}
 		$tags = array_map( 'trim', explode( ',', $variables['tags'] ) );
 		if ( ! empty( $tags ) && $tags[0] != '' ) {
-			array_unshift( $tags, 'ifttt_wordpress_bridge' );
+			array_unshift( $tags, 'ifttt_bridge' );
 		} else {
-			$tags = array( 'ifttt_wordpress_bridge' );
+			$tags = array( 'ifttt_bridge' );
 		}
 		$mt_keywords_data = $xpath->query( '/methodCall/params/param[4]/value/struct/member[name="mt_keywords"]/value/array/data' )->item( 0 );
 		$tag_value = $xpath->query( '/methodCall/params/param[4]/value/struct/member[name="mt_keywords"]/value/array/data/value' )->item( 0 );

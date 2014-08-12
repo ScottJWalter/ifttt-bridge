@@ -90,9 +90,9 @@ trait DatabaseSteps {
 	public function assert_num_of_log_entries( $num_of_log_entries ) {
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
-		$stmt->execute( array( ':option_name' => 'ifttt_wordpress_bridge_log' ) );
+		$stmt->execute( array( ':option_name' => 'ifttt_bridge_log' ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option 'ifttt_wordpress_bridge_log' doesn't exists" );
+		assertEquals( count( $result ), 1, "Option 'ifttt_bridge_log' doesn't exists" );
 		$log_entries = unserialize( $result[0]['option_value'] );
 		assertEquals( $num_of_log_entries, count( $log_entries ) );
 	}
@@ -104,9 +104,9 @@ trait DatabaseSteps {
 	public function assert_log( $expected_log_entry_msg ) {
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
-		$stmt->execute( array( ':option_name' => 'ifttt_wordpress_bridge_log' ) );
+		$stmt->execute( array( ':option_name' => 'ifttt_bridge_log' ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option 'ifttt_wordpress_bridge_log' doesn't exists" );
+		assertEquals( count( $result ), 1, "Option 'ifttt_bridge_log' doesn't exists" );
 		$log_entries = unserialize( $result[0]['option_value'] );
 		for ( $i = 0, $count_log_entries = count( $log_entries ); $i < $count_log_entries; $i++ ) {
 			if ( $expected_log_entry_msg == $log_entries[$i]['message'] ) {
