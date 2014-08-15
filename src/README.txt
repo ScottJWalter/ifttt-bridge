@@ -20,13 +20,13 @@ If you love IFTTT, but have always regretted that there are too many limits on w
 
 IFTTT Bridge for WordPress is a technical bridge between IFTTT und WordPress that allows flexible use of IFTTT-processed data in WordPress. There are no limits to what can be displayed and how.
 
-One example is the **IFTTT Instagram Gallery**. Instead of using the standard WordPress channel offered by IFTTT, which only posts one photo at a time, IFTTT Instagram Gallery will allow you to show your latest Instagram photos in an awesome and highly customizable sidebar grid or within your text field, displaying any number of photos and columns you like.
+One example is the [IFTTT Instagram Gallery](https://wordpress.org/plugins/ifttt-instagram-gallery/). Instead of using the standard WordPress channel offered by IFTTT, which only posts one photo at a time, IFTTT Instagram Gallery will allow you to show your latest Instagram photos in an awesome and highly customizable sidebar grid or within your text field, displaying any number of photos and columns you like.
 
 *For blog owners and administrators*
 
 IFTTT Bridge for WordPress will only prepare and process your IFTTT data, ensuring that you can use it on your WordPress blog in any way you like. To make it “come alive” on your blog, you will have to install a second plugin. Below you will find a list of currently available plugins that are compatible with IFTTT Bridge for WordPress:  
 
-- IFTTT Instagram Gallery
+- [IFTTT Instagram Gallery](https://wordpress.org/plugins/ifttt-instagram-gallery/)
 
 *For developers*
 
@@ -42,12 +42,12 @@ IFTTT or “If This Then That” is a service that enables users to connect diff
 * When a new item on Ebay comes up that matches your search certain criteria, the results will be sent to you via email.
 * Every time you are tagged in a photo on Facebook, it will be sent to Dropbox.
 
- 
 *What do I have to do to use this plugin?*
 
 1. Install this plugin (installation instructions can be found under the “Installations” tab)
-1. Register at www.ifttt.com
-1. Install the IFTTT Instagram Gallery or any other IFTTT plugin that fits your purpose. If you are a developer, you might even want to develop a plugin yourself.
+2. Register at www.ifttt.com
+3. Install the IFTTT Instagram Gallery or any other IFTTT plugin that fits your purpose. If you are a developer, you might even want to develop a plugin yourself.
+4. Check out the logging and the test request form in the option panel. This shoud help you if you are using this plugin the first time.
 
 If you need help, don’t hesitate to contact me!
 
@@ -80,3 +80,9 @@ e.g.
 2. Extract the `ifttt-bridge` directory to your computer
 3. Upload the `ifttt-bridge` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
+
+== Screenshots ==
+
+1. Configure IFTTT to use this plugin. Don't forget the 'ifttt_bridge' tag
+2. Send a test request when you are using this plugin the first time
+3. Use the logging to track how the IFTTT request is processed or to find (configuration) errors
