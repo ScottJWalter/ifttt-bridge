@@ -86,3 +86,8 @@ e.g.
 1. Configure IFTTT to use this plugin. Don't forget the 'ifttt_bridge' tag
 2. Send a test request when you are using this plugin the first time
 3. Use the logging to track how the IFTTT request is processed or to find (configuration) errors
+
+== Changelog ==
+
+= 1.0.1 =
+* Bugfix: Logging didn't work anymore after it had been emptied
