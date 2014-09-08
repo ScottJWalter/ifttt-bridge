@@ -233,16 +233,11 @@ class Ifttt_Bridge {
 			'level'   => $level,
 			'message' => $message,
 		);
-		$log_entries = get_option( 'ifttt_bridge_log' );
-		if ( $log_entries ) {
-			if ( count( $log_entries ) == 30 ) {
-				array_shift( $log_entries );
-			}
-			array_push( $log_entries, $log_entry );
-			update_option( 'ifttt_bridge_log', $log_entries );
-		} else {
-			$log_entries = array( $log_entry );
-			add_option( 'ifttt_bridge_log', $log_entries );
+		$log_entries = get_option( 'ifttt_bridge_log', array() );
+		if ( count( $log_entries ) == 30 ) {
+			array_shift( $log_entries );
 		}
+		$log_entries[] = $log_entry;
+		update_option( 'ifttt_bridge_log', $log_entries );
 	}
 }
