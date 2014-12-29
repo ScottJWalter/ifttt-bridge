@@ -170,7 +170,6 @@ class Ifttt_Bridge {
 			$data =& $HTTP_RAW_POST_DATA;
 		}
 		if ( $this->log_level_enabled( 'debug' ) ) {
-			error_log($data);
 			$this->log( 'debug', "Received request:\n" . $data );
 		}
 		$message = new IXR_Message( $data );
