@@ -1,5 +1,12 @@
 <?php
 
+namespace Context;
+
+use PHPUnit_Framework_Assert;
+use Exception;
+use DOMDocument;
+use DOMXPath;
+
 trait IftttSteps {
 
 	/**
@@ -31,21 +38,21 @@ trait IftttSteps {
 	 * @Given /the response code should be (\d*)$/
 	 */
 	public function assert_response_code( $expected ) {
-		assertEquals( $expected, $this->response_info['http_code'] );
+		PHPUnit_Framework_Assert::assertEquals( $expected, $this->response_info['http_code'] );
 	}
 
 	/**
 	 * @Given /the response body should contain "([^"]*)"$/
 	 */
 	public function assert_response_body_contains( $contained ) {
-		assertTrue( strpos( $this->response_body, $contained ) !== false, "Response body $this->response_body doesn't contain $contained" );
+		PHPUnit_Framework_Assert::assertTrue( strpos( $this->response_body, $contained ) !== false, "Response body $this->response_body doesn't contain $contained" );
 	}
 
 	/**
 	 * @Given /the response should have content type "([^"]*)"$/
 	 */
 	public function assert_response_content_type( $expected ) {
-		assertEquals( $expected, $this->response_info['content_type'] );
+		PHPUnit_Framework_Assert::assertEquals( $expected, $this->response_info['content_type'] );
 	}
 
 	/**

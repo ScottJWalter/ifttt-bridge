@@ -13,6 +13,6 @@ Feature: Uninstall plugin
     When I go to "/wp-admin/plugins.php"
     And I deactivate the plugin "IFTTT Bridge for WordPress"
     And I uninstall the plugin "IFTTT Bridge for WordPress"
-    Then I should see the message "The selected plugins have been deleted"
+    Then I should see the message "IFTTT Bridge for WordPress was successfully deleted."
     And the option "ifttt_bridge_log" should not exist
     And the option "ifttt_bridge_options" should not exist

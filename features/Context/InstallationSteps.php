@@ -1,5 +1,11 @@
 <?php
 
+namespace Context;
+
+use PHPUnit_Framework_Assert;
+use Exception;
+use ZipArchive;
+
 trait InstallationSteps {
 
 	private function create_wp_config_replacements() {
@@ -85,6 +91,9 @@ trait InstallationSteps {
 			}
 		}
 		$this->move_file_or_dir( $this->path( $this->temp_dir, 'wordpress' ), $this->webserver_dir );
+		if ( file_exists( $this->path( $this->install_dir, '.htaccess' ) ) ) {
+			$this->copy_file_or_dir( $this->path( $this->install_dir, '.htaccess' ), $this->path( $this->webserver_dir, '.htaccess' ) );
+		}
 	}
 
 	private function prepare_sqlite_integration_in_webserver() {

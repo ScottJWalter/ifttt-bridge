@@ -1,5 +1,10 @@
 <?php
 
+namespace Context;
+
+use PHPUnit_Framework_Assert;
+use Exception;
+
 trait ManualWordPressSteps {
 
 	/**
@@ -22,7 +27,7 @@ trait ManualWordPressSteps {
 	 */
 	public function activate_plugin_manually( $plugin_name ) {
 		$link = $this->get_plugin_area( $plugin_name )->find( 'xpath', "//a[contains(@href, 'action=activate')]" );
-		assertNotNull( $link, 'Link not found' );
+		PHPUnit_Framework_Assert::assertNotNull( $link, 'Link not found' );
 		$link->click();
 	}
 
@@ -31,9 +36,9 @@ trait ManualWordPressSteps {
 	 */
 	public function deactivate_plugin_manually( $plugin_name ) {
 		$link = $this->get_plugin_area( $plugin_name )->find( 'xpath', "//a[contains(@href, 'action=deactivate')]" );
-		assertNotNull( $link, 'Link not found' );
+		PHPUnit_Framework_Assert::assertNotNull( $link, 'Link not found' );
 		$link->click();
-		assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
+		PHPUnit_Framework_Assert::assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
 	}
 
 	/**
@@ -41,18 +46,15 @@ trait ManualWordPressSteps {
 	 */
 	public function uninstall_plugin_manually( $plugin_name ) {
 		$link = $this->get_plugin_area( $plugin_name )->find( 'xpath', "//a[contains(@href, 'action=delete-selected')]" );
-		assertNotNull( $link, 'Link not found' );
+		PHPUnit_Framework_Assert::assertNotNull( $link, 'Link not found' );
 		$link->click();
-		$form   = $this->get_page()->find( 'xpath', "//form[contains(@action, 'action=delete-selected')]" );
-		$submit = $form->find( 'css', '#submit' );
-		assertNotNull( $submit );
-		$submit->press();
-		assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
+		$this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+		PHPUnit_Framework_Assert::assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
 	}
 
 	private function get_plugin_area( $plugin_name ) {
 		$plugin_area = $this->get_page()->find( 'xpath', "//tr[td/strong/text() = '$plugin_name']" );
-		assertNotNull( $plugin_area, 'Plugin area not found' );
+		PHPUnit_Framework_Assert::assertNotNull( $plugin_area, 'Plugin area not found' );
 		return $plugin_area;
 	}
 
@@ -60,16 +62,16 @@ trait ManualWordPressSteps {
 	 * @Given /^I should see the message "([^"]*)"$/
 	 */
 	public function assert_message( $msg ) {
-		assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
-		assertTrue( $this->get_page()->hasContent( $msg ), "Can't find message" );
+		PHPUnit_Framework_Assert::assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
+		PHPUnit_Framework_Assert::assertTrue( $this->get_page()->hasContent( $msg ), "Can't find message" );
 	}
 
 	/**
 	 * @Given /^I should see the error message "([^"]*)"$/
 	 */
 	public function assert_error_message( $msg ) {
-		assertNotNull( $this->get_page()->find( 'css', '.error' ), "Can't find element" );
-		assertTrue( $this->get_page()->hasContent( $msg ), "Can't find message" );
+		PHPUnit_Framework_Assert::assertNotNull( $this->get_page()->find( 'css', '.error' ), "Can't find element" );
+		PHPUnit_Framework_Assert::assertTrue( $this->get_page()->hasContent( $msg ), "Can't find message" );
 	}
 
 	/**
@@ -82,7 +84,7 @@ trait ManualWordPressSteps {
 				$this->assertPageContainsText( $row[0] );
 			}
 		} elseif ( is_a( $mixed, 'Behat\Gherkin\Node\PyStringNode' ) ) {
-			foreach ( $mixed->getLines() as $line ) {
+			foreach ( $mixed->getStrings() as $line ) {
 				$this->assertPageContainsText( trim( $line ) );
 			}
 		} else {
@@ -95,7 +97,7 @@ trait ManualWordPressSteps {
 	 */
 	public function assert_element_having_attribute( $selector, $attribute_name, $attribute_value ) {
 		$element = $this->get_page()->find( 'css', $selector );
-		assertEquals( $attribute_value, $element->getAttribute( $attribute_name ) );
+		PHPUnit_Framework_Assert::assertEquals( $attribute_value, $element->getAttribute( $attribute_name ) );
 	}
 
 	/**
@@ -103,7 +105,7 @@ trait ManualWordPressSteps {
 	 */
 	public function assert_element_not_having_attribute( $selector, $attribute_name, $attribute_value ) {
 		$element = $this->get_page()->find( 'css', $selector );
-		assertNotEquals( $attribute_value, $element->getAttribute( $attribute_name ) );
+		PHPUnit_Framework_Assert::assertNotEquals( $attribute_value, $element->getAttribute( $attribute_name ) );
 	}
 
 	/**
@@ -131,7 +133,7 @@ trait ManualWordPressSteps {
 				break;
 			}
 		}
-		assertTrue( $page->hasContent( 'Dashboard' ) );
+		PHPUnit_Framework_Assert::assertTrue( $page->hasContent( 'Dashboard' ) );
 	}
 
 	private function get_page() {

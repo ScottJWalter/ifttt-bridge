@@ -1,5 +1,11 @@
 <?php
 
+namespace Context;
+
+use PDO;
+use PHPUnit_Framework_Assert;
+use Exception;
+
 trait DatabaseSteps {
 
 	/**
@@ -69,8 +75,8 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => $option_name ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option '$option_name' doesn't exists" );
-		assertEquals( $option_value, $result[0]['option_value'], "Option '$option_name' should have value '$option_value' but has value '".$result[0]['option_value']."'" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, "Option '$option_name' doesn't exists" );
+		PHPUnit_Framework_Assert::assertEquals( $option_value, $result[0]['option_value'], "Option '$option_name' should have value '$option_value' but has value '".$result[0]['option_value']."'" );
 	}
 
 	/**
@@ -81,7 +87,7 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => $option_name ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 0, "The option '$option_name' was found but should not exist" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 0, "The option '$option_name' was found but should not exist" );
 	}
 
 	/**
@@ -92,9 +98,9 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'ifttt_bridge_log' ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option 'ifttt_bridge_log' doesn't exists" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, "Option 'ifttt_bridge_log' doesn't exists" );
 		$log_entries = unserialize( $result[0]['option_value'] );
-		assertEquals( $num_of_log_entries, count( $log_entries ) );
+		PHPUnit_Framework_Assert::assertEquals( $num_of_log_entries, count( $log_entries ) );
 	}
 
 	/**
@@ -106,7 +112,7 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'ifttt_bridge_log' ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option 'ifttt_bridge_log' doesn't exists" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, "Option 'ifttt_bridge_log' doesn't exists" );
 		$log_entries = unserialize( $result[0]['option_value'] );
 		for ( $i = 0, $count_log_entries = count( $log_entries ); $i < $count_log_entries; $i++ ) {
 			if ( $expected_log_entry_msg == $log_entries[$i]['message'] ) {

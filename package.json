@@ -1,6 +1,6 @@
 {
   "name": "ifttt-bridge",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "IFTTT Bridge for WordPress is a plugin that allows you to display IFTTT-processed data on your WordPress site in any way you like.",
   "main": "index.js",
   "scripts": {

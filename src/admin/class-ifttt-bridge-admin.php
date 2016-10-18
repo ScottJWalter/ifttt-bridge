@@ -109,7 +109,7 @@ class Ifttt_Bridge_Admin {
 		$this->log_entries = array();
 		foreach ( $log as $log_entry ) {
 			$this->log_entries[] = array(
-				'time' => date_i18n( _x( 'Y/m/d h:i:s A', 'Date time pattern', $this->plugin_slug ) ),
+				'time' => date_i18n( _x( 'Y/m/d h:i:s A', 'Date time pattern', $this->plugin_slug ), $log_entry['time'] ),
 				'level' => $log_entry['level'],
 				'message' => $log_entry['message'],
 			);

@@ -3,7 +3,7 @@ Contributors: bjoerne
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XS98Y5ASSH5S4
 Tags: ifttt, ifthisthenthat
 Requires at least: 3.9
-Tested up to: 4.1
+Tested up to: 4.6.1
 Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
@@ -94,3 +94,6 @@ e.g.
 
 = 1.0.2 =
 * Bugfix: htmlspecialchars is not applied to raw request anymore but to all displayed log entries
+
+= 1.0.3 =
+* Bugfix: Display date and time of log entry instead of current date

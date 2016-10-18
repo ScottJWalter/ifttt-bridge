@@ -1,10 +1,11 @@
 <?php
 
+namespace Context;
+
 use Behat\Behat\Exception\PendingException;
 use Behat\MinkExtension\Context\MinkContext;
+use PHPUnit_Framework_Assert;
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
 require_once 'ManualWordPressSteps.php';
 require_once 'DatabaseSteps.php';
 require_once 'InstallationSteps.php';
@@ -36,16 +37,27 @@ class FeatureContext extends MinkContext {
 	/**
 	 * @BeforeScenario
 	 */
-	public function before_scenario( $event )
-	{
-		$scenario = $this->get_scenario( $event );
-		foreach ( $scenario->getTags() as $tag ) {
-			if ( preg_match( '/^implicitSeleniumTimeout--(\d*)$/', $tag, $matches ) ) {
-				$implicitSeleniumTimeout = intval( $matches[1] * 1000 );
-				$this->getSession()->getDriver()->setTimeouts( array( 'implicit' => $implicitSeleniumTimeout ) );
-			}
+	public function set_implicit_timeout( $event ) {
+		if ( array_key_exists( 'selenium_implicit_timeout', $this->parameters ) && $this->parameters['selenium_implicit_timeout'] >= 0 ) {
+			$this->getSession()->getDriver()->setTimeouts( array( 'implicit' => $this->parameters['selenium_implicit_timeout'] ) );
 		}
 	}
+
+
+
+	// /**
+	//  * @BeforeScenario
+	//  */
+	// public function before_scenario( $event )
+	// {
+	// 	$scenario = $this->get_scenario( $event );
+	// 	foreach ( $scenario->getTags() as $tag ) {
+	// 		if ( preg_match( '/^implicitSeleniumTimeout--(\d*)$/', $tag, $matches ) ) {
+	// 			$implicitSeleniumTimeout = intval( $matches[1] * 1000 );
+	// 			$this->getSession()->getDriver()->setTimeouts( array( 'implicit' => $implicitSeleniumTimeout ) );
+	// 		}
+	// 	}
+	// }
 
 	private function get_scenario( $event )
 	{
